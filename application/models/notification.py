@@ -4,6 +4,7 @@ from .base import *
 
 
 class Notification(Base):
+	
 	created_by = db.Column(db.Integer, db.ForeignKey('user.id'))
 	has_read = db.Column(db.Boolean)
 	action = db.Column(db.String(50))

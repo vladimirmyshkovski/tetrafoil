@@ -22,18 +22,6 @@ class Contact(Base):
     org_id = db.Column(db.Integer, db.ForeignKey('organisation.id'), nullable=False, info={"label": "Organisation"})
     activities = db.relationship('Activity', backref='contact')
     
-    '''
-    @staticmethod
-    def create(**kwargs):
-        c = Contact(**kwargs)
-        db.session.add(c)
-        try:
-            db.session.commit()
-            flash((c.__tablename__).capitalize() + u' created successfully!', 'sшccess')
-        except IntegrityError:
-            db.session.rollback()
-            flash((c.__tablename__).capitalize() + u' created failed!', 'error')
-        return c
-    '''
+
     def __repr__(self):
         return str(self.id)

@@ -16,11 +16,11 @@ class User(Base, db.Model):
     email = db.Column(db.String(50), unique=True)
     avatar = db.Column(db.String(200), default='default.png')
     password = db.Column(db.String(200))
-    is_admin = db.Column(db.Boolean, default=False)
-    organisations = db.relationship('Organisation', backref="user")
-    projects = db.relationship('Project', backref="user")
-    contacts = db.relationship('Contact', backref="user")
-    activities = db.relationship('Activity', backref="user")        
+    role = db.Column(db.Integer, db.ForeignKey('role.id'), default=1, nullable=False)
+    organisations = db.relationship('Organisation', backref="users_organisations")
+    projects = db.relationship('Project', backref="users_projects")
+    contacts = db.relationship('Contact', backref="users_contacts")
+    activities = db.relationship('Activity', backref="users_activities")        
     
     @staticmethod
     def get_unread_notifs(self, reverse=False):
@@ -83,6 +83,7 @@ class User(Base, db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.password, password)
+
 
     def __repr__(self):
         return '<User %s>' % self.name

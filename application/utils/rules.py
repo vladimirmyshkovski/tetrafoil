@@ -2,6 +2,7 @@
 from flask import session, abort, flash, redirect, url_for
 from permission import Rule
 from ..models import User
+from ..models import Role
 
 
 class VisitorRule(Rule):
@@ -27,8 +28,8 @@ class AdminRule(Rule):
 
     def check(self):
         user_id = int(session['user_id'])
-        user = User.query.filter(User.id == user_id).first()
-        return user and user.is_admin
+        user = User.query.filter(User.id == user_id, ).first()
+        return user and user.role
 
     def deny(self):
         abort(403)

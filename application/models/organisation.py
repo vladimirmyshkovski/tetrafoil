@@ -8,22 +8,15 @@ import sqlalchemy_utils
 from sqlalchemy_utils import EmailType, ChoiceType
 
 class Organisation(Base):
-    TYPE_CHOICE = [
-        ('charity', 'Charity'),
-        ('funder', 'Funder'),
-        ('other', 'Other')
-    ]
 
     name = db.Column(db.String(50), unique=True, nullable=False)
-    city = db.Column(db.String(50), nullable=False)
-    #type = db.Column(ChoiceType(TYPE_CHOICE), nullable=False)
-    country = db.Column(db.String(50), nullable=False)
     address = db.Column(db.String(50))
-
+    city = db.Column(db.Integer, db.ForeignKey('city.id'), nullable=False) 
+    country = db.Column(db.Integer, db.ForeignKey('country.id'), nullable=False) 
+    type = db.Column(db.Integer, db.ForeignKey('type.id'), nullable=False) 
     created_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False) 
-
-    contacts = db.relationship('Contact', backref="organisation")
-    activities = db.relationship('Activity', backref='organisation')
+    contacts = db.relationship('Contact', backref="organisations_contacts")
+    activities = db.relationship('Activity', backref='organisations_activities')
 
     '''
     @staticmethod

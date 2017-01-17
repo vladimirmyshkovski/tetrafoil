@@ -76,12 +76,6 @@ def view(keyword):
         if str(i.__tablename__) == keyword:
             table = i.query.filter_by(created_by=g.user.id).all()
             columns = [o.key for o in i.__table__.columns]
-
-    '''
-    socketio.emit('message',
-        {'data': 'blah '},
-        namespace='/notifs',
-        room=user_room)'''
     return render_template('crm/view/view.html', columns=columns, table=table, keyword=keyword)
 
 '''

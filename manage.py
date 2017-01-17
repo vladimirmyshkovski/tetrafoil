@@ -7,6 +7,7 @@ from application import create_app
 from application.models import db
 import sqlalchemy_utils
 from application.utils.socketio import socketio
+from application.models import Role, User
 
 # Used by app debug & livereload
 PORT = 5000
@@ -17,6 +18,22 @@ manager = Manager(app)
 # db migrate commands
 migrate = Migrate(app, db)
 manager.add_command('db', MigrateCommand)
+
+
+@manager.command
+def create_roles():
+    manager = Role(name = 'manager')
+    admin = Role(name = 'admin')
+    superadmin = Role(name = 'superadmin')
+    create_super_user = User(name='admin', email='admin@admin.admin', password='admin', role=3)
+    with app.app_context():
+        print('Committing to database ...')
+        db.session.add(manager)
+        db.session.add(admin)
+        db.session.add(superadmin)
+        db.session.add(create_super_user)
+        db.session.commit()
+    print('Added.')
 
 
 @manager.command
