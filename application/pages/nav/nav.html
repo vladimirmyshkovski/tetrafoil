@@ -1,0 +1,91 @@
+
+<nav class="navbar navbar-inverse navbar-default navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{{ url_for('site.index') }}">
+                Flask-Crm
+            </a>
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        </button>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li id="nav-index">
+                    <a href="{{ url_for('site.index') }}">Home</a>
+                </li>
+                <li id="nav-about">
+                    <a href="{{ url_for('site.about') }}">About</a>
+                </li>
+            </ul>
+
+            <form class="navbar-form navbar-left" role="search" method="get" action="#">
+                <div class="input-group">
+                    <input type="text" name="keyword" class="form-control input-sm"
+                           placeholder="">
+               <span class="input-group-btn">
+                  <button class="btn btn-default btn-sm" type="submit">
+                      <span class="fa fa-search"></span>
+                  </button>
+               </span>
+                </div>
+            </form>                
+            <ul class="nav navbar-nav navbar-right">
+                {% if g.user %}
+                    <li role="presentation" class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                    <div style="position:relative; float:left;">
+                    <i class="fa fa-bell" style="text-align:center; vertical-align:middle; position: relative;">
+                    <span style="position: absolute;background: #d9534f;height:1.25rem;bottom:1rem;left: 0.5rem;width:1.25rem;text-align: center;line-height: 1rem;font-size: 0.7rem;border-radius: 50%;color:white;border:1px solid white;" id="notification-badge"></span></i>
+                    </div>
+                    </a>
+                    <ul class="dropdown-menu" id="notifications">
+                    
+                    <li><a href="{{url_for('crm.view', keyword=notification)}}">View All <span id="notifications-count"></span>  notificanions</a></li>    
+                    </ul>
+                    </li>
+
+                    <li id="nav-settings">
+                        <a href="#">{{ g.user.name }}</a>
+                    </li>
+                    <li role="presentation" class="dropdown" id="nav-add">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Add</a>
+                        <ul class="dropdown-menu">
+                            {% for i in tables %}
+                            {% if i == 'user' %}
+                            {% else %}
+                            <li><a data-toggle="modal" data-target="#myModal{{i.capitalize()[0:3]}}">{{i.capitalize()}}</a></li>
+                            {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li role="presentation" class="dropdown" id="nav-view">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">View</a>
+                        <ul class="dropdown-menu">
+                            {% for i in tables %}
+                            {% if i == 'user' %}
+                            {% else %}
+                            <li><a href="../view/{{i}}">{{i.capitalize()}}</a></li>
+                            {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('account.signout') }}">Sign out</a>
+                    </li>
+                {% else %}
+                    <li id="nav-signin">
+                        <a href="{{ url_for('account.signin') }}">Sign in</a>
+                    </li>
+                    <li id="nav-signup">
+                        <a href="{{ url_for('account.signup') }}">Sign up</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>

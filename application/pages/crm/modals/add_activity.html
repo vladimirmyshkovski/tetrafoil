@@ -1,0 +1,27 @@
+
+{% block page_js %}{% endblock %}
+{% block page_css %}  
+    <link rel="stylesheet" href="/pages/crm/modals/add.css"/>{% endblock %}
+<div class="modal fade" id="myModalAct" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Add activity</h4>
+      </div>
+      <div class="modal-body">
+                <form method="post" class="form-signin" action="/add/activity">
+                    {{ ActForm.csrf_token() }}
+                    {% for i in ActForm %}
+                    {% if i.id == 'csrf_token' %}
+                    {% else %}
+                    {{ vertical_field(i) }}
+                    {% endif %}
+                    {% endfor %}  
+                  <button type="submit" type="submit" class="btn btn-lg btn-primary btn-block">Add activity</button>
+                  </form>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

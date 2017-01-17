@@ -1,0 +1,66 @@
+{% extends "/site/layout.html" %}
+
+{% block page_title %}{{keyword}}{% endblock %}
+{% block page_content %}
+        <article id="main-content" class="main-content" style="padding-top: 150px">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4 col-sm-push-5 col-sm-offset-2 wow slideInRight">
+                        <h2>Производственные возможности</h2>
+                        <p>Будучи непосредственно производителем термотрансферной ленты, мы имеем в своем распоряжении высокотехнологичную производственную линию и все подразделения, необходимые для полноценного обслуживания клиентов.</p> <a href="{{url_for('site.manufactory')}}">Подробнее</a> </div>
+                    <div class="col-sm-4 col-sm-pull-6 text-center wow slideInRight"> <img src="static/img/catalog/WAX Standard_iccat_ttt.png" alt=""> </div>
+                </div>
+            </div>
+        </article>
+        <article id="main-content" class="main-content main-content--block-2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4 col-sm-push-5 col-sm-offset-2 wow slideInRight">
+                        <h2>Индивидуальное изготовление</h2>
+                        <p>Испытываете потребность в размере и материале риббона, отличном от уже имеющихся в ассортименте? Мы готовы выполнить приватный заказ на термотрансферную и текстильную ленту и прочие расходные материалы. Наши специалисты окажут помощь в выборе и решении сложных и нестандартных задач по маркировке.</p> <a href="{{url_for('site.individual')}}">Рассчитать стоимость</a> </div>
+                    <div class="col-sm-4 col-sm-pull-6 text-center wow slideInRight"> <img src="static/img/catalog/WAX Premium_iccat_ttt.png" alt=""> </div>
+                </div>
+            </div>
+        </article>
+        <article id="main-content" class="main-content main-content--block-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4 col-sm-push-5 col-sm-offset-2 wow slideInRight">
+                        <h2>Склад</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eleifend pharetra faucibus. Praesent eget ligula ante. Morbi in magna cursus, varius leo at, tincidunt metus. Quisque ultricies enim velit, a aliquet risus tincidunt et. Cras accumsan elementum tortor a aliquam. Suspendisse a cursus velit. </p> <a href="{{url_for('site.stock')}}">Продукция</a> </div>
+                    <div class="col-sm-4 col-sm-pull-6 text-center wow slideInRight"> <img src="static/img/catalog/Wax Resin flat head_iccat_ttt.png" alt=""> </div>
+                </div>
+            </div>
+        </article>
+        <article id="main-content" class="main-content main-content--block-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4 col-sm-push-5 col-sm-offset-2 wow slideInRight">
+                        <h2>Технические характеристики</h2>
+                        <p>Термотрансферная лента имеет довольно сложное строение, основой которого является полиэстерная пленка. С одной стороны, ее покрывают цветным красящим веществом, с другой – специфической смазкой. Задача последней – предотвращать трение между лентой и термоголовкой устройства. Мы предлагаем красящие ленты с различным типом основы.</p> <a href="{{url_for('site.technical')}}">Узнать больше</a> </div>
+                    <div class="col-sm-4 col-sm-pull-6 text-center wow slideInRight"> <img src="static/img/catalog/Wax Resin near edge_iccat_ttt.png" alt=""> </div>
+                </div>
+            </div>
+        </article>
+        <article id="main-content" class="main-content main-content--block-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4 col-sm-push-5 col-sm-offset-2 wow slideInRight">
+                        <h2>Доставка и оплата </h2>
+                        <p>Оплата товара, сроки его изготовления и последующая доставка прописываются в двустороннем договоре о сотрудничестве.
+                        <a href="{{url_for('site.delivery')}}">Узнать больше</a> </div>
+                    <div class="col-sm-4 col-sm-pull-6 text-center wow slideInRight"> <img src="static/img/catalog/Resin standard_iccat_ttt.png" alt=""> </div>
+                </div>
+            </div>
+        </article>
+        <article id="main-content" class="main-content main-content--block-6">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4 col-sm-push-5 col-sm-offset-2 wow slideInRight">
+                        <h2>Бесплатные образцы</h2>
+                        <p>Предлагаемые нами термотрансферные ленты обладают отличной износостойкостью и высоким качеством печати, соответствующим требованиям производителей печатной техники. Чтобы вы могли удостовериться в этом лично и убедить своих клиентов, мы предлагаем образцы выпускаемых риббонов на совершенно безвозмездной основе.</p> <a href="{{url_for('site.free')}}">Заказать образец</a> </div>
+                    <div class="col-sm-4 col-sm-pull-6 text-center wow slideInRight"> <img src="static/img/catalog/Resin textile_iccat_ttt.png" alt=""> </div>
+                </div>
+            </div>
+        </article>
+{% endblock %}

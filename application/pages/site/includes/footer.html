@@ -1,0 +1,47 @@
+        <footer>
+            <article id="footer" class="footer">
+                <div class="container">
+                    <div class="row wow slideInUp" data-wow-offset="100" >
+                        <div class="col-sm-4 col-sm-offset-1  col-sm-push-6">
+                            <form id="main__form" class="main__form" action="../create", method="POST">
+                                <h3>Оставить заявку</h3>
+                                <h4>Ваша электронная почта:</h4>
+                                <div class="form-group">
+                                {{ form.csrf_token() }}
+                                {{ vertical_field(form.email, id="exampleInputEmail1", placeholder="Электронная почта") }}
+                                </div>
+                                <h4>Ваш телефон:</h4>
+                                <div class="form-group">
+                                {{ vertical_field(form.phone, id="exampleInputPassword1", placeholder="Телефон") }}
+                                </div>
+                                <button type="submit" class="btn btn-default footer__btn">Отправить</button>
+                            </form>
+                        </div>
+                        <div class="col-sm-4 col-sm-offset-2 col-sm-pull-6">
+                            <a href="/"><img src="static/img/logo-footer.png" alt="" class="logo__footer"></a>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eleifend pharetra faucibus. Praesent eget ligula ante. Morbi in magna cursus, varius leo at, tincidunt.</p>
+                            <hr>
+                            <h3>Номера для связи:</h3>
+                            <ul class="phone__footer">
+                                <li class="phone__list"><a href="tel:+375295404047" class="phone__link">+375 (29) <span class="phone__link--blue">540 40 47</span></a></li>
+                                <li class="phone__list"><a href="tel:+375333814001" class="phone__link">+375 (33) <span class="phone__link--blue">381 40 01</span></a></li>
+                            </ul>
+                            <hr>
+                            <h3>Полезные ссылки</h3>
+                            <ul class="footer__nav">
+                                <li><a href="#">Главная</a></li>
+                                <li><a href="#">О компании</a></li>
+                                <li><a href="#">Продукция</a></li>
+                                <li><a href="#">Доставка</a></li>
+                                <li><a href="#">Технические характеристики</a></li>
+                                <li><a href="#">Акции, скидки</a></li>
+                                <li><a href="#">Образцы</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article id="copy" class="copy">
+                <div class="container"> <span class="copyright">© Все права защищены.</span> <span class="dev">Разработка сайта: <a href="https://igor-peregudov.github.io/" target="_blank"><img src="static/img/ip.png" alt=""></a></span> </div>
+            </article>
+        </footer>
