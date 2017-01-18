@@ -20,7 +20,7 @@ class User(Base, db.Model):
     organisations = db.relationship('Organisation', backref="users_organisations")
     projects = db.relationship('Project', backref="users_projects")
     contacts = db.relationship('Contact', backref="users_contacts")
-    activities = db.relationship('Activity', backref="users_activities")        
+    activities = db.relationship('Activity', backref="users_activities")
     
     @staticmethod
     def get_unread_notifs(self, reverse=False):
