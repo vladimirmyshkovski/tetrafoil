@@ -2,7 +2,7 @@
 from flask import render_template, Blueprint, redirect, request, url_for, g, flash, abort, session
 from ..utils.account import signin_user, signout_user
 from ..utils.permissions import VisitorPermission, UserPermission
-from ..models import db, User, Organisation, Contact, Project, Activity, Invoice, Base, Notification, Leed
+from ..models import db, User, Organisation, Contact, Project, Activity, Invoice, Base, Notification, Leed, Status, City, Country, Type, Role
 from ..forms import AddOrganisationForm, AddContactForm, AddProjectForm, AddActivityForm, AddInvoiceForm, AddLeedForm
 
 bp = Blueprint('crm', __name__)
@@ -38,7 +38,7 @@ def crm():
 @UserPermission()
 def add(keyword):
     """Add """
-    baselist = [User, Organisation, Contact, Project, Activity, Invoice, Leed]
+    baselist = [User, Organisation, Contact, Project, Activity, Invoice, Base, Notification, Leed, Status, City, Country, Type, Role]
     formlist = [AddOrganisationForm, AddContactForm, AddProjectForm, AddActivityForm, AddInvoiceForm, AddLeedForm]
     for i in baselist:
         if str(i.__tablename__) == keyword:

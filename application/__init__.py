@@ -184,7 +184,7 @@ def register_hooks(app):
     @app.before_request
     def before_request():
         g.user = get_current_user()
-        if g.user and g.user.is_admin:
+        if g.user and g.user.role is not 1:
             g._before_request_time = time.time()
 
     @app.after_request

@@ -22,12 +22,14 @@ manager.add_command('db', MigrateCommand)
 
 @manager.command
 def create_roles():
+    user = Role(name = 'user')
     manager = Role(name = 'manager')
     admin = Role(name = 'admin')
     superadmin = Role(name = 'superadmin')
-    create_super_user = User(name='admin', email='admin@admin.admin', password='admin', role=3)
+    create_super_user = User(name='admin', email='admin@admin.admin', password='admin', role=4)
     with app.app_context():
         print('Committing to database ...')
+        db.session.add(user)
         db.session.add(manager)
         db.session.add(admin)
         db.session.add(superadmin)

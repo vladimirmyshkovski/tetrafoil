@@ -1,14 +1,13 @@
 # coding: utf-8
 from flask import Blueprint, render_template
 from ..models import Role, db
+from ..utils.permissions import AdminPermission
 
 
 bp = Blueprint('admin', __name__)
 
 @bp.route('/admin')
+@AdminPermission()
 def admin():
-	db.create_all()
-	role = Role(name='admin')
-	db.session.add(role)
-	db.session.commit()
+	return render_template('site/index/index.html')
 
