@@ -15,7 +15,7 @@ class Config(object):
 
     # Site domain
     SITE_TITLE = "flask-crm"
-    SITE_DOMAIN = "http://localhost:5000"
+    SITE_DOMAIN = "http://www.ribbon.market"
 
     # SQLAlchemy config
     # See:
