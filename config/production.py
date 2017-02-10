@@ -12,7 +12,7 @@ class ProductionConfig(Config):
     SITE_DOMAIN = "http://www.ribbon.market"
 
     # Db config
-    SQLALCHEMY_DATABASE_URI = "postgresql//ttt/localhost/ttt"
+    SQLALCHEMY_DATABASE_URI = "postgresql://ttt@localhost/ttt"
 
     # Sentry
     SENTRY_DSN = ''
