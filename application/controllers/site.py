@@ -4,7 +4,7 @@ from ..forms import AddLeedForm
 from ..models import Leed, User, Product, Image, Calculator
 
 
-bp = Blueprint('site', __name__, template_folder='')
+bp = Blueprint('site', __name__, template_folder='pages')
 
 
 @bp.route('/create', methods=['POST', 'GET'])
