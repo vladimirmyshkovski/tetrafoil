@@ -25,7 +25,7 @@ def create():
 
 
 @bp.route('/Главная', methods=['GET'])
-@bp.route('/')
+@bp.route('/', methods=['GET'])
 def index():
     """Index page."""
     return render_template('/site/index/index.html')
