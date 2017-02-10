@@ -8,7 +8,7 @@ host_string = config.HOST_STRING
 
 def deploy():
     env.host_string = config.HOST_STRING
-    with cd('/var/www/flask-crm'):
+    with cd('/var/www/tetrafoil'):
         with shell_env(MODE='PRODUCTION'):
             run('git reset --hard HEAD')
             run('git pull')
@@ -18,9 +18,9 @@ def deploy():
                 run('pip install -r requirements.txt')
                 run('python manage.py db upgrade')
                 run('python manage.py build')
-            run('supervisorctl restart flask-crm')
+            run('supervisorctl restart ttt')
 
 
 def restart():
     env.host_string = config.HOST_STRING
-    run('supervisorctl restart flask-crm')
+    run('supervisorctl restart ttt')

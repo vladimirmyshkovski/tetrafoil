@@ -9,7 +9,7 @@ class ProductionConfig(Config):
     SESSION_COOKIE_NAME = 'flask-crm_session'
 
     # Site domain
-    SITE_DOMAIN = "http://www.flask-crm.com"
+    SITE_DOMAIN = "http://www.ribbon.market"
 
     # Db config
     SQLALCHEMY_DATABASE_URI = "postgresql//ttt/localhost/ttt"
