@@ -12,7 +12,7 @@ class ProductionConfig(Config):
     SITE_DOMAIN = "http://www.flask-crm.com"
 
     # Db config
-    SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:password@localhost/flask-crm"
+    SQLALCHEMY_DATABASE_URI = "postgresql//ttt/localhost/ttt"
 
     # Sentry
     SENTRY_DSN = ''
