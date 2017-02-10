@@ -1,5 +1,5 @@
 # orm/properties.py
-# Copyright (C) 2005-2016 the SQLAlchemy authors and contributors
+# Copyright (C) 2005-2017 the SQLAlchemy authors and contributors
 # <see AUTHORS file>
 #
 # This module is part of SQLAlchemy and is released under
@@ -42,7 +42,7 @@ class ColumnProperty(StrategizedProperty):
         '_mapped_by_synonym', '_deferred_column_loader')
 
     def __init__(self, *columns, **kwargs):
-        """Provide a column-level property for use with a Mapper.
+        r"""Provide a column-level property for use with a Mapper.
 
         Column-based properties can normally be applied to the mapper's
         ``properties`` dictionary using the :class:`.Column` element directly.

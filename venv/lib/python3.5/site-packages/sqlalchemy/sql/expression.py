@@ -1,5 +1,5 @@
 # sql/expression.py
-# Copyright (C) 2005-2016 the SQLAlchemy authors and contributors
+# Copyright (C) 2005-2017 the SQLAlchemy authors and contributors
 # <see AUTHORS file>
 #
 # This module is part of SQLAlchemy and is released under
@@ -15,7 +15,7 @@ class.
 """
 
 __all__ = [
-    'Alias', 'Any', 'All', 'ClauseElement', 'ColumnCollection', 'ColumnElement',
+    'Alias', 'any_', 'all_', 'ClauseElement', 'ColumnCollection', 'ColumnElement',
     'CompoundSelect', 'Delete', 'FromClause', 'Insert', 'Join', 'Lateral',
     'Select',
     'Selectable', 'TableClause', 'Update', 'alias', 'and_', 'asc', 'between',

@@ -1,6 +1,11 @@
 # coding: utf-8
 from itsdangerous import URLSafeSerializer, BadSignature
 from flask import current_app
+from flask_security import Security, SQLAlchemyUserDatastore
+from application.models import User, Role, db
+
+security = Security()
+user_datastore = SQLAlchemyUserDatastore(db, User, Role) 
 
 
 def encode(something):

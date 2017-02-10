@@ -1,0 +1,132 @@
+{% extends "/site/layout.html" %}
+{% block page_css %}
+<link rel="stylesheet" href="/static/css/libs/powerange.min.css">
+<link rel="stylesheet" href="/pages/site/product/product.css">
+{% endblock %}
+{% block page_title %}{{ product.name }}{% endblock %}
+{% block page_js %} 
+  <script src="/static/js/libs/powerange.min.js"></script> 
+  <script type="text/javascript">
+
+
+    var course = {% if cource %} {{ cource }} {% else %} 59 {% endif %} 
+    var price = {% if product.price %} {{ product.price }} {% else %} 0.15 {% endif %}
+
+    var width = {
+        start: {{width.start}},
+        min: {{width.min}},
+        max: {{width.max}},
+        step: {{width.step}}
+    }
+    var height = {
+        start: {{height.start}},
+        min: {{height.min}},
+        max: {{height.max}},
+        step: {{height.step}}
+    }
+
+
+    var dec = document.querySelector('.js-decimal');
+    var initDec = new Powerange(dec, { decimal: true, callback: displayDecimalValue, min: {{ width.min }}, max: {{ width.max }}, step: {{ width.step }}, start: {{ width.start }} });
+    function displayDecimalValue() {
+        document.getElementById('js-decimal-display').innerHTML = dec.value;
+    }
+
+
+
+
+
+    var vert = document.querySelector('.js-decimal-vertical');
+    var initVert = new Powerange(vert, { decimal: true, callback: displayDecimalVerticalValue, min: {{ height.min }}, max: {{ height.max }}, step: {{ height.step }}, start: {{ height.start }} });
+    function displayDecimalVerticalValue() {
+        document.getElementById('js-decimal-vertical-display').innerHTML = vert.value;
+    }
+
+    dec.onchange = function() {
+    	document.getElementById('count').innerHTML = Math.round(((Math.round(vert.value)/1000 * Math.round(dec.value))*price)*course);
+    };
+    vert.onchange = function() {
+    	document.getElementById('count').innerHTML = Math.round(((Math.round(vert.value)/1000 * Math.round(dec.value))*price)*course);
+    };
+
+  </script>
+{% endblock %}
+{% block page_content %}
+<article class="main-content" style="padding-top: 20rem">
+<div class="container">
+	<div class="row">
+		<div class="col-lg-6 col-md-12 col-xs-12" style="padding-top: 10mrem">
+			<h2>{{ product.name }}</h2>
+			<p>{{ product.description }}</p>
+		</div>
+        <div class="col-lg-6 col-md-12 col-xs-12">
+        <div style="text-align: center">
+			<img src="/static/img/product_images/{{image.path}}" width="75%">
+		</div>
+        </div>
+	</div>
+</div>
+</article>
+<article class="main-content" style="background: white">
+<div class="container">
+    <div class="row">
+
+        <div class="col-lg-6 col-xs-12">
+            <img src="/static/img/product/size_icon-2.png" style="margin-top: 1rem;">
+        </div>
+        <div class="col-lg-6">
+            <h1 style="text-align: center">Рассчитай стоимость рулона</h1>
+
+            <div class="slider-wrapper">
+                <input type="text" class="js-decimal" />
+            </div>
+            <br>
+            <div class="slider-wrapper">
+            <input type="text" class="js-decimal-vertical" />
+            </div>
+            <div class="col-lg-6 col-lg-offset-5 col-md-6 col-md-offset-5 col-sm-6 col-sm-offset-5 col-xs-6 col-xs-offset-5">
+            {% if width.name %}
+            <div class="btn-group" id="status" data-toggle="buttons">
+              <label class="btn btn-default btn-on btn-lg active">
+              <input type="radio" value="1" name="multifeatured_module[module_id][status]" checked="checked">IN</label>
+              <label class="btn btn-default btn-off btn-lg">
+              <input type="radio" value="0" name="multifeatured_module[module_id][status]">OUT</label>
+            </div>
+            {% endif %}
+            <br><br><br><br>
+            </div>
+            <br><br><br><br>
+            <div class="col-lg-10 col-md-6 col-md-offset-5 col-sm-6 col-sm-offset-5 col-xs-12">
+                                <span>Ширина мм.
+                                <span id="js-decimal-display" style="width: 5rem; height: 5rem; border:0.25rem solid #0087c4; border-radius: 1rem; text-align: center; padding: 1.5rem 3rem; margin-top: 5rem; ">
+                                </span>
+                                </span>
+
+                                <span>Длина м. 
+                                <span id="js-decimal-vertical-display" style="width: 5rem; height: 5rem; border:0.25rem solid #0087c4; border-radius: 1rem; text-align: center; padding: 1.5rem 3rem; margin-top: 5rem; ">
+                                </span></span>
+
+                                <span>Сумма руб. 
+                                <span id="count" style="width: 5rem; height: 5rem; border:0.25rem solid #0087c4; border-radius: 1rem; text-align: center; padding: 1.5rem 3rem; margin-top: 5rem">
+                
+                                </span>
+                                </span>
+            </div>
+                        <br><br><br><br>
+            <div style="padding-top: 5rem; text-align: center;">
+            <button class="btn btn-default footer__btn">Получи образец</button>
+            </div>
+        </div>
+{% if width.name %}
+        <style>
+.btn-default.btn-on.active{background-color: #0298da;color: white; outline: none;}
+.btn-default.btn-off.active{background-color: #00608c;color: white; outline: none;}
+        </style>
+{% endif %}
+
+
+
+
+        </div>
+</article>
+{% endblock %}

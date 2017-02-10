@@ -1,5 +1,5 @@
 # connectors/mxodbc.py
-# Copyright (C) 2005-2016 the SQLAlchemy authors and contributors
+# Copyright (C) 2005-2017 the SQLAlchemy authors and contributors
 # <see AUTHORS file>
 #
 # This module is part of SQLAlchemy and is released under
@@ -123,7 +123,7 @@ class MxODBCConnector(Connector):
         # of what we're doing here
         dbapi_con = connection.connection
         version = []
-        r = re.compile('[.\-]')
+        r = re.compile(r'[.\-]')
         # 18 == pyodbc.SQL_DBMS_VER
         for n in r.split(dbapi_con.getinfo(18)[1]):
             try:

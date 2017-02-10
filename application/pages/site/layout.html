@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="/static/css/fontello.css">
     <link rel="stylesheet" href="/static/css/animate.min.css">
     <link rel="stylesheet" href="/static/css/main.css">
+
+
     {# CSS page #}
     {% block page_css %}{% endblock %}
     {# JS global vars #}
@@ -33,21 +35,20 @@
     {# JS libs #}
     <script src="/static/js/libs/respond.min.js"></script>
     <script src="/static/js/libs/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.2/socket.io.min.js"></script>
     <script src="/static/js/libs/bootstrap.min.js"></script>
     <script src="/static/js/init.js"></script>
     <script src="/static/js/libs.min.js"></script>
     <script src="/static/js/scripts.js"></script>
     <script src="http://malsup.github.com/jquery.form.js"></script> 
+    <script src="/pages/crm/includes/chat/chat-client.js"/></script>
+
+
+
     <script>
     new WOW().init();
     </script>
-    <script> 
-        $(document).ready(function() { 
-            $('#main__form').ajaxForm(function() { 
-                alert("Спасибо за то, что выбрали нас!");
-            }); 
-        }); 
-    </script> 
+
 </head>
 
 <body>
@@ -57,7 +58,10 @@
 <div id="main">
     {% block page_content %}{% endblock %}
 </div>
+
+{% include 'crm/includes/chat/chat.html' %}
 {% include 'site/includes/footer.html' %}
-{% block page_js %}{% endblock %}
+{% block page_js %}
+{% endblock %}
 </body>
 </html>

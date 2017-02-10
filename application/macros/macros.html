@@ -1,15 +1,15 @@
 {% macro render_field(field) %}
-   <dt>{{ field.label }}
+   <dt>{#{ field.label }#}</dt>
    <dd>{{ field(**kwargs)|safe }}
    {% if field.errors %}
    <ul class=errors>
-	{% for error in field.errors %}
-		<li>{{ error }}</li>
-		{% endfor %}
+   {% for error in field.errors %}
+      <li>{{ error }}</li>
+      {% endfor %}
    </ul>
-		{% endif %}
+      {% endif %}
    </dd>
-		{% endmacro %}
+{% endmacro %}
 
 {% macro display_field(field, record) %}
 <p><b>{{ field }}</b> {{ record[field] }}</p>

@@ -1,5 +1,5 @@
 # sql/sqltypes.py
-# Copyright (C) 2005-2016 the SQLAlchemy authors and contributors
+# Copyright (C) 2005-2017 the SQLAlchemy authors and contributors
 # <see AUTHORS file>
 #
 # This module is part of SQLAlchemy and is released under
@@ -660,7 +660,7 @@ class Float(Numeric):
 
     def __init__(self, precision=None, asdecimal=False,
                  decimal_return_scale=None, **kwargs):
-        """
+        r"""
         Construct a Float.
 
         :param precision: the numeric precision for use in DDL ``CREATE
@@ -1151,7 +1151,7 @@ class Enum(String, SchemaType):
     __visit_name__ = 'enum'
 
     def __init__(self, *enums, **kw):
-        """Construct an enum.
+        r"""Construct an enum.
 
         Keyword arguments which don't apply to a specific backend are ignored
         by that backend.
@@ -1728,7 +1728,55 @@ class JSON(Indexable, TypeEngine):
 
     Index operations return an expression object whose type defaults to
     :class:`.JSON` by default, so that further JSON-oriented instructions
-    may be called upon the result type.
+    may be called upon the result type.   Note that there are backend-specific
+    idiosyncracies here, including that the Postgresql database does not generally
+    compare a "json" to a "json" structure without type casts.  These idiosyncracies
+    can be accommodated in a backend-neutral way by by making explicit use
+    of the :func:`.cast` and :func:`.type_coerce` constructs.
+    Comparison of specific index elements of a :class:`.JSON` object
+    to other objects work best if the **left hand side is CAST to a string**
+    and the **right hand side is rendered as a json string**; a future SQLAlchemy
+    feature such as a generic "astext" modifier may simplify this at some point:
+
+    * **Compare an element of a JSON structure to a string**::
+
+        from sqlalchemy import cast, type_coerce
+        from sqlalchemy import String, JSON
+
+        cast(
+            data_table.c.data['some_key'], String
+        ) == '"some_value"'
+
+        cast(
+            data_table.c.data['some_key'], String
+        ) == type_coerce("some_value", JSON)
+
+    * **Compare an element of a JSON structure to an integer**::
+
+        from sqlalchemy import cast, type_coerce
+        from sqlalchemy import String, JSON
+
+        cast(data_table.c.data['some_key'], String) == '55'
+
+        cast(
+            data_table.c.data['some_key'], String
+        ) == type_coerce(55, JSON)
+
+    * **Compare an element of a JSON structure to some other JSON structure** - note
+      that Python dictionaries are typically not ordered so care should be taken
+      here to assert that the JSON structures are identical::
+
+        from sqlalchemy import cast, type_coerce
+        from sqlalchemy import String, JSON
+        import json
+
+        cast(
+            data_table.c.data['some_key'], String
+        ) == json.dumps({"foo": "bar"})
+
+        cast(
+            data_table.c.data['some_key'], String
+        ) == type_coerce({"foo": "bar"}, JSON)
 
     The :class:`.JSON` type, when used with the SQLAlchemy ORM, does not
     detect in-place mutations to the structure.  In order to detect these, the

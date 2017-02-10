@@ -1,10 +1,12 @@
 # coding: utf-8
 from ._base import db
 from .base import *
+from flask_security import RoleMixin
 
-class Role(Base):
+
+class Role(Base, RoleMixin):
 	
 	name = db.Column(db.String(50), unique=True)
-	users =  db.relationship('User', backref='user_role', lazy='dynamic')
+	description = db.Column(db.String(255))
 
 

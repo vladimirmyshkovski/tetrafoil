@@ -17,6 +17,8 @@ from werkzeug.contrib.fixers import ProxyFix
 from six import iteritems
 from .utils.account import get_current_user
 from config import load_config
+from .forms import AddLeedForm, AddOrganisationForm, AddContactForm, AddProjectForm,AddActivityForm, AddInvoiceForm, AddSampleForm
+from .models import db
 
 # convert python's encoding to utf8
 try:
@@ -73,11 +75,17 @@ def create_app():
     register_db(app)
     register_routes(app)
     register_jinja(app)
-    register_error_handle(app)
+    #register_error_handle(app)
     register_hooks(app)
     register_context_processor(app)
     register_socketio(app)
-    register_eventlet()
+    register_redis(app)
+    register_before_first_request(app)
+    register_admin(app)
+    register_security(app)
+    register_babel(app)
+    register_mail(app)
+
 
     return app
 
@@ -138,6 +146,47 @@ def register_db(app):
     db.init_app(app)
 
 
+def register_babel(app):
+    """Register models."""
+    from .utils.babel import babel
+
+    babel.init_app(app)
+
+
+def register_redis(app):
+    """Register redis."""
+    from .utils.redis import redis_store
+
+    redis_store.init_app(app)
+
+
+def register_admin(app):
+    """Register Flask-admin."""
+    from .utils.admin import admin
+
+    admin.init_app(app)
+
+
+def register_security(app):
+    """Register Flask-security."""
+    from .utils.security import security, user_datastore
+    
+    security.init_app(app, user_datastore)
+
+
+def register_mail(app):
+    """Register mail."""
+    from .utils.mail import mail
+
+    mail.init_app(app)
+
+"""
+def register_api(app):
+    from .utils.api import api
+    
+    api.init_app(app)
+"""
+
 def register_socketio(app):
     """Register socketio."""
     from .utils.socketio import socketio
@@ -156,26 +205,52 @@ def register_routes(app):
             app.register_blueprint(bp)
 
 
-def register_eventlet():
-    """Register eventlet"""
-    import eventlet
-    eventlet.monkey_patch()
-
-
 def register_error_handle(app):
     """Register HTTP error pages."""
 
     @app.errorhandler(403)
     def page_403(error):
-        return render_template('site/403/403.html'), 403
+        if g.user:
+            return render_template('crm/403/403.html'), 403
+        else:
+            return render_template('site/403/403.html'), 403
 
     @app.errorhandler(404)
     def page_404(error):
-        return render_template('site/404/404.html'), 404
+        if g.user:
+            return render_template('crm/404/404.html'), 404
+        else:
+            return render_template('site/404/404.html'), 404
 
     @app.errorhandler(500)
     def page_500(error):
-        return render_template('site/500/500.html'), 500
+        if g.user:
+            return render_template('crm/500/500.html'), 500
+        else:
+            return render_template('site/500/500.html'), 500
+
+
+
+def register_before_first_request(app):
+    """Register before_first_request"""
+    from .utils.eventlet import eventlet
+    from .utils.redis import redis_store
+    from .utils.socketio import socketio
+
+    def redisReader():
+        print ('Starting Redis subscriber')
+        pubsub = redis_store.pubsub()
+        pubsub.subscribe('msg')
+        for msg in pubsub.listen():
+            #print ('>>>>>', msg)
+            print('Redis says : ' + str(msg['data']))
+
+    def setupRedis():
+        print('setupRedis')
+        pool = eventlet.GreenPool()
+        pool.spawn(redisReader)
+
+    app.before_first_request(setupRedis)
 
 
 def register_hooks(app):
@@ -184,8 +259,9 @@ def register_hooks(app):
     @app.before_request
     def before_request():
         g.user = get_current_user()
-        if g.user and g.user.role is not 1:
+        if g.user:
             g._before_request_time = time.time()
+
 
     @app.after_request
     def after_request(response):
@@ -194,19 +270,18 @@ def register_hooks(app):
             response.headers['X-Render-Time'] = delta * 1000
         return response
 
+
 def register_context_processor(app):
     @app.context_processor
     def context_processor():
-        from .forms import AddLeedForm
-        if get_current_user():
-            from .models import db, User
-            from .forms import AddOrganisationForm, AddContactForm, AddProjectForm, AddActivityForm, AddInvoiceForm
+        SampleForm = AddSampleForm(request.form)
+        LeedForm = AddLeedForm(request.form)
+        if g.user:
             OrgForm = AddOrganisationForm(request.form)
             ConForm = AddContactForm(request.form)
             ProForm = AddProjectForm(request.form)
             ActForm = AddActivityForm(request.form)
             InvForm = AddInvoiceForm(request.form)
-            #LeedForm = AddLeedForm(request.form)
             tables = db.metadata.tables.keys()
             tables = [i for i in tables if i != 'created_by']
             return dict(
@@ -215,13 +290,11 @@ def register_context_processor(app):
                 ProForm=ProForm,
                 ActForm=ActForm,
                 InvForm=InvForm,
-                #LeedForm=LeedForm,
-                tables=tables,
-                )
+                LeedForm=LeedForm,
+                tables=tables)
         else:
-            LeedForm = AddLeedForm(request.form)
-            return dict()
-
+            return dict(LeedForm=LeedForm,
+                SampleForm=SampleForm)
 
 
 def _get_template_name(template_reference):

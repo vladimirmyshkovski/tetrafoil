@@ -10,16 +10,22 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar__list">
                         <li><a href="{{url_for('site.index')}}">Главная</a></li>
-                        <li><a href="{{url_for('site.manufactory')}}">О компании</a></li>
-                        <li><a href="{{url_for('site.individual')}}">Продукция</a></li>
-                        <li><a href="#">Доставка</a></li>
-                        <li><a href="#">Технические характеристики</a></li>
+                        <li><a href="{{url_for('site.about')}}">О компании</a></li>
+                        <li><a href="{{url_for('site.products')}}">Продукция</a></li>
+                        <li><a href="{{url_for('site.divelery')}}">Доставка</a></li>
+                        <li><a href="{{url_for('site.technical')}}">Технические характеристики</a></li>
                         <li><a href="#">Акции, скидки</a></li>
-                        <li><a href="#">Образцы</a></li>
+                        <li><a href="{{url_for('site.sample')}}">Образцы</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="phone__list"><a href="tel:+375295404047" class="phone__link">+375 (29) <span class="phone__link--blue">540 40 47</span></a></li>
-                        <li class="phone__list"><a href="tel:+375333814001" class="phone__link">+375 (33) <span class="phone__link--blue">381 40 01</span></a></li>
+                        <li class="phone__list">
+                        <a href="tel:+375333814001" class="phone__link">+7 (499) <span class="phone__link--blue">322 88 70</span></a>
+                        </li>
+                        <li class="phone__list">
+                        <i class="fa fa-2x fa-skype" style="color: #00aff0"></i>
+                        <i class="fa fa-2x fa-whatsapp" style="color: #34AF23"></i>
+                        <i class="fa fa-2x fa-viber" style="color: #59267c"></i>
+                        </li>            
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->

@@ -1,0 +1,19 @@
+{% macro primary_button(field) %}
+<button type="submit" class="btn btn-primary">{{ field.name }}</button>
+{% endmacro %}
+
+{% macro danger_button(field) %}
+<button type="submit" class="btn btn-danger">{{ field.name }}</button>
+{% endmacro %}
+
+{% macro success_button(field) %}
+<button type="submit" class="btn btn-success">{{ field.name }}</button>
+{% endmacro %}
+
+{% macro checkbox(field) %}
+<label class="custom-control custom-checkbox">
+  <input type="checkbox" class="custom-control-input">
+  <span class="custom-control-indicator"></span>
+  <span class="custom-control-description">{{ field.name }}</span>
+</label>
+{% endmacro %}

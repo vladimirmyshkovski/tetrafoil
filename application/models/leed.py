@@ -1,7 +1,6 @@
 # coding: utf-8
 from datetime import datetime
 from .base import *
-from ..utils.socketio import push_notification_to_all_users
 from ..models import Notification
 
 class Leed(Base):

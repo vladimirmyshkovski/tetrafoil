@@ -1,0 +1,23 @@
+{% extends 'crm/layout.html' %}
+{% from "_form.html" import vertical_field %}
+{% from "security/_macros.html" import render_field_with_errors %}
+{% from "macros.html" import render_field %}
+{% from "_button.html" import primary_button, checkbox %}
+{% include "security/_messages.html" %}
+{% block page_content %}
+<div class="container">
+<div class="col-lg-6 col-lg-offset-3">
+<div class="row">
+<h1>Login</h1>
+<form action="{{ url_for_security('login') }}" method="POST" name="login_user_form">
+  {{ login_user_form.hidden_tag() }}
+  {{ vertical_field(login_user_form.email) }}
+  {{ vertical_field(login_user_form.password) }}
+  {{ checkbox(login_user_form.remember) }}
+  {{ render_field(login_user_form.next) }}
+  {{ primary_button(login_user_form.submit) }}
+</form>
+</div>
+</div>
+</div>
+{% endblock %}

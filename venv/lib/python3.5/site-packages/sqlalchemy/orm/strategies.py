@@ -1,5 +1,5 @@
 # orm/strategies.py
-# Copyright (C) 2005-2016 the SQLAlchemy authors and contributors
+# Copyright (C) 2005-2017 the SQLAlchemy authors and contributors
 # <see AUTHORS file>
 #
 # This module is part of SQLAlchemy and is released under
@@ -1087,7 +1087,15 @@ class SubqueryLoader(AbstractRelationshipLoader):
             state.get_impl(self.key).\
                 set_committed_value(state, dict_, collection)
 
-        populators["new"].append((self.key, load_collection_from_subq))
+        def load_collection_from_subq_existing_row(state, dict_, row):
+            if self.key not in dict_:
+                load_collection_from_subq(state, dict_, row)
+
+        populators["new"].append(
+            (self.key, load_collection_from_subq))
+        populators["existing"].append(
+            (self.key, load_collection_from_subq_existing_row))
+
         if context.invoke_all_eagers:
             populators["eager"].append((self.key, collections.loader))
 
@@ -1108,7 +1116,14 @@ class SubqueryLoader(AbstractRelationshipLoader):
             state.get_impl(self.key).\
                 set_committed_value(state, dict_, scalar)
 
-        populators["new"].append((self.key, load_scalar_from_subq))
+        def load_scalar_from_subq_existing_row(state, dict_, row):
+            if self.key not in dict_:
+                load_scalar_from_subq(state, dict_, row)
+
+        populators["new"].append(
+            (self.key, load_scalar_from_subq))
+        populators["existing"].append(
+            (self.key, load_scalar_from_subq_existing_row))
         if context.invoke_all_eagers:
             populators["eager"].append((self.key, collections.loader))
 
@@ -1368,8 +1383,8 @@ class JoinedLoader(AbstractRelationshipLoader):
                 # name on it.
                 efm = inspect(adapter.aliased_class).\
                     _entity_for_mapper(
-                        parentmapper
-                        if parentmapper.isa(self.parent) else self.parent)
+                        localparent
+                        if localparent.isa(self.parent) else self.parent)
 
                 # look for our attribute on the adapted entity, else fall back
                 # to our straight property

@@ -1,0 +1,76 @@
+{% block page_css %}
+<link rel="stylesheet" href="/pages/crm/includes/chat/chat.css"/>
+{% endblock %}
+{% block page_js %}
+{% endblock %}
+
+<style>
+  .hide {
+    display: none;
+  }
+</style>
+
+<div class="chat-icon" style="position: absolute; left: 92.5%; top: 82.5%; z-index: 99998;">
+<a><i class="fa fa-4x fa-weixin"></i></a>
+</div>
+
+<aside id="sidebar_secondary" class="tabbed_sidebar ng-scope chat_sidebar">
+<div class="leed-input-name hide">
+<input id="leed-input-name">
+</div>
+<div class="popup-head">
+                <div class="popup-head-left pull-left">
+                <a target="_blank" href="#">
+<img class="md-user-image" style="border-radius: 999px" alt="" title="" src="https://kak2z.ru/galavatars/images/9/561.png">
+<h1>Narnik Gamarnik</h1>
+<small><br> 
+<span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span>
+ Manager</small>
+</a>
+</div>
+
+                      <div class="popup-head-right pull-right">
+
+                      <button class="chat-header-button" type="button"><i class="glyphicon glyphicon-facetime-video"></i></button>
+                        <button class="chat-header-button" type="button"><i class="glyphicon glyphicon-earphone"></i></button>
+                        <div class="btn-group gurdeepoushan">
+                                      <button class="chat-header-button" data-toggle="dropdown" type="button" aria-expanded="false">
+                                       <i class="glyphicon glyphicon-paperclip"></i> </button>
+                                      <ul role="menu" class="dropdown-menu pull-right">
+                                        <li><a href="#"><span class="glyphicon glyphicon-picture" aria-hidden="true"></span> Gallery</a></li>
+                                        <li><a href="#"><span class="glyphicon glyphicon-camera" aria-hidden="true"></span> Photo</a></li>
+                                        <li><a href="#"><span class="glyphicon glyphicon-facetime-video" aria-hidden="true"></span> Video</a></li>
+                                        <li><a href="#"><span class="glyphicon glyphicon-headphones" aria-hidden="true"></span> Audio</a></li>
+                                        <li><a href="#"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Location</a></li>
+                                        <li><a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Contact</a></li>
+                                      </ul>
+                        </div>
+                        <button data-widget="remove" id="removeClass" class="chat-header-button pull-right" type="button"><i class="glyphicon glyphicon-remove"></i></button>
+                      </div>
+              </div>
+
+                    <div id="chat" class="chat_box_wrapper chat_box_small chat_box_active" style="opacity: 1; display: block; transform: translateX(0px);">
+                        <div class="chat_box touchscroll chat_box_colors_a" id="chat-box">
+                        </div>
+                    </div>
+
+
+<div class="chat_submit_box">
+    <div class="uk-input-group">
+        <div class="gurdeep-chat-box">
+        <span style="vertical-align: sub;" class="uk-input-group-addon">
+        <a href="#"><i class="fa fa-smile-o"></i></a>
+        </span>
+        <input type="text" placeholder="Type a message" id="submit_message" name="submit_message" class="md-input">
+        <span style="vertical-align: sub;" class="uk-input-group-addon">
+        <a href="#"><i class="fa fa-camera"></i></a>
+        </span>
+        </div>
+    
+    <span class="uk-input-group-addon">
+    <a href="#"><i class="glyphicon glyphicon-send"></i></a>
+    </span>
+    </div>
+</div>
+
+</aside>

@@ -1,0 +1,18 @@
+{% extends 'admin/layout.html' %}
+{% block page_content %}
+{% for page in pages %}
+<div class="container">
+<div class="row">
+<div class="col-lg-6 col-lg-offset-6">
+<h1>{{page.name}}</h1>
+<h2>{{page.link}}</h2>
+{% for key, value in page.content.items() %}
+    {% for items in value %}
+        <h3>{{ items }}</h3>
+    {% endfor %}
+{% endfor %}
+</div>
+</div>
+</div>
+{% endfor %}
+{% endblock %}

@@ -1,9 +1,9 @@
-{% extends "layout.html" %}
+{% extends "crm/layout.html" %}
 {% from '_form.html' import vertical_field %}
 
 {% block page_title %}Add {{keyword}}{% endblock %}
 {% block page_js %}
-    <script src="/pages/crm/add/add.js"></script>{% endblock %}
+{% endblock %}
         <script>
 $(document).ready(function() {
   $("#org_id").change(function() {
@@ -16,7 +16,7 @@ $(document).ready(function() {
 });
     </script>
 {% block page_css %}
-    <link rel="stylesheet" href="/pages/crm/add/add.css"/>{% endblock %}
+{% endblock %}
 {% block page_content %}
     <div class="container">
         <div class="row">

@@ -1,5 +1,5 @@
 # sqlalchemy/pool.py
-# Copyright (C) 2005-2016 the SQLAlchemy authors and contributors
+# Copyright (C) 2005-2017 the SQLAlchemy authors and contributors
 # <see AUTHORS file>
 #
 # This module is part of SQLAlchemy and is released under
@@ -31,7 +31,7 @@ proxies = {}
 
 
 def manage(module, **params):
-    """Return a proxy for a DB-API module that automatically
+    r"""Return a proxy for a DB-API module that automatically
     pools connections.
 
     Given a DB-API 2.0 module and pool management parameters, returns
@@ -44,7 +44,7 @@ def manage(module, **params):
     :param poolclass: the class used by the pool module to provide
       pooling.  Defaults to :class:`.QueuePool`.
 
-    :param \*\*params: will be passed through to *poolclass*
+    :param \**params: will be passed through to *poolclass*
 
     """
     try:
@@ -1061,7 +1061,7 @@ class QueuePool(Pool):
 
     def __init__(self, creator, pool_size=5, max_overflow=10, timeout=30,
                  **kw):
-        """
+        r"""
         Construct a QueuePool.
 
         :param creator: a callable function that returns a DB-API

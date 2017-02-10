@@ -1,5 +1,5 @@
 # ext/declarative/api.py
-# Copyright (C) 2005-2016 the SQLAlchemy authors and contributors
+# Copyright (C) 2005-2017 the SQLAlchemy authors and contributors
 # <see AUTHORS file>
 #
 # This module is part of SQLAlchemy and is released under
@@ -250,7 +250,7 @@ def declarative_base(bind=None, metadata=None, mapper=None, cls=object,
                      name='Base', constructor=_declarative_constructor,
                      class_registry=None,
                      metaclass=DeclarativeMeta):
-    """Construct a base class for declarative class definitions.
+    r"""Construct a base class for declarative class definitions.
 
     The new base class will be given a metaclass that produces
     appropriate :class:`~sqlalchemy.schema.Table` objects and makes

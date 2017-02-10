@@ -1,5 +1,5 @@
 # mysql/mysqldb.py
-# Copyright (C) 2005-2016 the SQLAlchemy authors and contributors
+# Copyright (C) 2005-2017 the SQLAlchemy authors and contributors
 # <see AUTHORS file>
 #
 # This module is part of SQLAlchemy and is released under
@@ -184,7 +184,7 @@ class MySQLDialect_mysqldb(MySQLDialect):
     def _get_server_version_info(self, connection):
         dbapi_con = connection.connection
         version = []
-        r = re.compile('[.\-]')
+        r = re.compile(r'[.\-]')
         for n in r.split(dbapi_con.get_server_info()):
             try:
                 version.append(int(n))

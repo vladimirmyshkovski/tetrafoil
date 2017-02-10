@@ -1,5 +1,5 @@
 # sql/functions.py
-# Copyright (C) 2005-2016 the SQLAlchemy authors and contributors
+# Copyright (C) 2005-2017 the SQLAlchemy authors and contributors
 # <see AUTHORS file>
 #
 # This module is part of SQLAlchemy and is released under
@@ -191,7 +191,7 @@ class FunctionElement(Executable, ColumnElement, FromClause):
         return None
 
     def alias(self, name=None, flat=False):
-        """Produce a :class:`.Alias` construct against this
+        r"""Produce a :class:`.Alias` construct against this
         :class:`.FunctionElement`.
 
         This construct wraps the function in a named alias which
@@ -202,8 +202,8 @@ class FunctionElement(Executable, ColumnElement, FromClause):
 
             from sqlalchemy.sql import column
 
-            stmt = select([column('data_view')]).\\
-                select_from(SomeTable).\\
+            stmt = select([column('data_view')]).\
+                select_from(SomeTable).\
                 select_from(func.unnest(SomeTable.data).alias('data_view')
             )
 
@@ -618,7 +618,7 @@ class random(GenericFunction):
 
 
 class count(GenericFunction):
-    """The ANSI COUNT aggregate function.  With no arguments,
+    r"""The ANSI COUNT aggregate function.  With no arguments,
     emits COUNT \*.
 
     """

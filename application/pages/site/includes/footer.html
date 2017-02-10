@@ -1,3 +1,10 @@
+{% block page_js %}
+<script src="/pages/site/includes/footer.js"></script>
+{% endblock %}   
+{% block page_css %}
+<link rel="stylesheet" href="/static/css/fa-viber.css"/>
+{% endblock %}     
+
         <footer>
             <article id="footer" class="footer">
                 <div class="container">
@@ -7,35 +14,39 @@
                                 <h3>Оставить заявку</h3>
                                 <h4>Ваша электронная почта:</h4>
                                 <div class="form-group">
-                                {{ form.csrf_token() }}
-                                {{ vertical_field(form.email, id="exampleInputEmail1", placeholder="Электронная почта") }}
+                                {{ LeedForm.csrf_token() }}
+                                {{ vertical_field(LeedForm.email, id="exampleInputEmail1", placeholder="Электронная почта") }}
                                 </div>
                                 <h4>Ваш телефон:</h4>
                                 <div class="form-group">
-                                {{ vertical_field(form.phone, id="exampleInputPassword1", placeholder="Телефон") }}
+                                {{ vertical_field(LeedForm.phone, id="exampleInputPassword1", placeholder="Телефон") }}
                                 </div>
                                 <button type="submit" class="btn btn-default footer__btn">Отправить</button>
                             </form>
                         </div>
                         <div class="col-sm-4 col-sm-offset-2 col-sm-pull-6">
                             <a href="/"><img src="static/img/logo-footer.png" alt="" class="logo__footer"></a>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eleifend pharetra faucibus. Praesent eget ligula ante. Morbi in magna cursus, varius leo at, tincidunt.</p>
+                            <p>ООО "Термотрансферные технологии"</p>
+                            <p>129226, г. Москва, ул. Докукина, д. 12, строение 1.</p>
+                            <p>Юридический адрес: 129226, г. Москва, ул. Докукина 12, к. 10</p>
+                            <hr>
+                            <p>ИНН 7716241433</p>
+                            <p>КПП 771601001</p>
+                            <p>р/с 40702810700005000633</p>
+                            <p>в Московском филиале ПАО «Совкомбанк», 129090, г. Москва, ул. Щепкина, д. 28</p>
+                            <p>30101810945250000967 БИК 044525967</p>
                             <hr>
                             <h3>Номера для связи:</h3>
                             <ul class="phone__footer">
-                                <li class="phone__list"><a href="tel:+375295404047" class="phone__link">+375 (29) <span class="phone__link--blue">540 40 47</span></a></li>
-                                <li class="phone__list"><a href="tel:+375333814001" class="phone__link">+375 (33) <span class="phone__link--blue">381 40 01</span></a></li>
+
+                                <li class="phone__list"><a href="tel:+375333814001" class="phone__link">+7 (499) <span class="phone__link--blue">322 88 70</span></a></li>
                             </ul>
                             <hr>
                             <h3>Полезные ссылки</h3>
                             <ul class="footer__nav">
-                                <li><a href="#">Главная</a></li>
-                                <li><a href="#">О компании</a></li>
-                                <li><a href="#">Продукция</a></li>
-                                <li><a href="#">Доставка</a></li>
-                                <li><a href="#">Технические характеристики</a></li>
-                                <li><a href="#">Акции, скидки</a></li>
-                                <li><a href="#">Образцы</a></li>
+                                <li><a href="#"><i class="fa fa-2x fa-skype" style="color: #00aff0"></i></a></li>
+                                <li><a href="#"><i class="fa fa-2x fa-whatsapp" style="color: #34AF23"></i></a></li>
+                                <li><a href="#"><i class="fa fa-2x fa-viber" style="color: #59267c"></i></a></li>
                             </ul>
                         </div>
                     </div>

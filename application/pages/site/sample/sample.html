@@ -1,0 +1,32 @@
+{% extends "/site/layout.html" %}
+{% block page_css %}
+{% endblock %}
+{% block page_title %}{{keyword}}{% endblock %}
+{% block page_js %} 
+{% endblock %}
+{% block page_content %}
+{% from '_form.html' import site_form_field %}
+
+<article id="footer" class="footer">
+                <div class="container">
+                    <div class="row" >
+                        <div class="col-sm-4 col-sm-offset-4">
+                            <form id="main__form" class="main__form" action="../create", method="POST">
+                                <h3>Заказать образцы</h3>
+                                <h4></h4>
+                                <div class="form-group">
+                                {{ SampleForm.csrf_token() }}
+                                {{ site_form_field(SampleForm.name, placeholder="Страна") }}
+                                </div>
+                                <h4></h4>
+                                <div class="form-group">
+                                {{ site_form_field(SampleForm.name, placeholder="Город") }}
+                                </div>
+                                <button type="submit" class="btn btn-default footer__btn">Отправить</button>
+                            </form>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+{% endblock %}

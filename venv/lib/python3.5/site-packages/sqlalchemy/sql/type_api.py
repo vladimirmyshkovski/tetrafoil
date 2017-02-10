@@ -1,5 +1,5 @@
 # sql/types_api.py
-# Copyright (C) 2005-2016 the SQLAlchemy authors and contributors
+# Copyright (C) 2005-2017 the SQLAlchemy authors and contributors
 # <see AUTHORS file>
 #
 # This module is part of SQLAlchemy and is released under
@@ -1212,6 +1212,9 @@ class Variant(TypeDecorator):
         """
         self.impl = base
         self.mapping = mapping
+
+    def coerce_compared_value(self, operator, value):
+        return self.impl.coerce_compared_value(operator, value)
 
     def load_dialect_impl(self, dialect):
         if dialect.name in self.mapping:

@@ -1,5 +1,5 @@
 # sql/crud.py
-# Copyright (C) 2005-2016 the SQLAlchemy authors and contributors
+# Copyright (C) 2005-2017 the SQLAlchemy authors and contributors
 # <see AUTHORS file>
 #
 # This module is part of SQLAlchemy and is released under
@@ -505,7 +505,7 @@ def _append_param_insert_select_hasdefault(
             (not c.default.optional or
              not compiler.dialect.sequences_optional):
             proc = c.default
-            values.append((c, proc))
+            values.append((c, proc.next_value()))
     elif c.default.is_clause_element:
         proc = c.default.arg.self_group()
         values.append((c, proc))
@@ -603,7 +603,7 @@ def _extend_values_for_multiparams(compiler, stmt, values, kw):
                 c,
                 (_create_bind_param(
                     compiler, c, row[c.key],
-                    name="%s_m%d" % (c.key, i + 1)
+                    name="%s_m%d" % (c.key, i + 1), **kw
                 ) if elements._is_literal(row[c.key])
                     else compiler.process(
                         row[c.key].self_group(), **kw))

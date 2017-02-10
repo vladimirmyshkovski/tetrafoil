@@ -1,5 +1,5 @@
 # sqlalchemy/processors.py
-# Copyright (C) 2010-2016 the SQLAlchemy authors and contributors
+# Copyright (C) 2010-2017 the SQLAlchemy authors and contributors
 # <see AUTHORS file>
 # Copyright (C) 2010 Gaetan de Menten gdementen@gmail.com
 #
@@ -114,9 +114,9 @@ def py_fallback():
             return bool(value)
 
     DATETIME_RE = re.compile(
-        "(\d+)-(\d+)-(\d+) (\d+):(\d+):(\d+)(?:\.(\d+))?")
-    TIME_RE = re.compile("(\d+):(\d+):(\d+)(?:\.(\d+))?")
-    DATE_RE = re.compile("(\d+)-(\d+)-(\d+)")
+        r"(\d+)-(\d+)-(\d+) (\d+):(\d+):(\d+)(?:\.(\d+))?")
+    TIME_RE = re.compile(r"(\d+):(\d+):(\d+)(?:\.(\d+))?")
+    DATE_RE = re.compile(r"(\d+)-(\d+)-(\d+)")
 
     str_to_datetime = str_to_datetime_processor_factory(DATETIME_RE,
                                                         datetime.datetime)

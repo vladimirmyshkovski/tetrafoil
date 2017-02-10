@@ -8,15 +8,30 @@ from flask_socketio import emit
 from flask import g, url_for
 from .notification import Notification
 import humanize
+from flask_security import UserMixin
 
 
-class User(Base, db.Model):
+roles_users = db.Table('roles_users',
+        db.Column('user_id', db.Integer(), db.ForeignKey('user.id')),
+        db.Column('role_id', db.Integer(), db.ForeignKey('role.id')))
+
+
+class User(Base, UserMixin):
     
-    name = db.Column(db.String(50), unique=True)
-    email = db.Column(db.String(50), unique=True)
+    first_name = db.Column(db.String(255))
+    last_name = db.Column(db.String(255))
+    email = db.Column(db.String(255), unique=True)
+    password = db.Column(db.String(255))
     avatar = db.Column(db.String(200), default='default.png')
-    password = db.Column(db.String(200))
-    role = db.Column(db.Integer, db.ForeignKey('role.id'), default=1, nullable=False)
+    roles = db.relationship('Role', secondary=roles_users,
+                            backref=db.backref('users', lazy='dynamic'))
+    active = db.Column(db.Boolean())
+    confirmed_at = db.Column(db.DateTime())
+    last_login_at = db.Column(db.DateTime())
+    current_login_at = db.Column(db.DateTime())
+    last_login_ip = db.Column(db.String(55))
+    current_login_ip = db.Column(db.String(55))
+    login_count = db.Column(db.Integer())
     organisations = db.relationship('Organisation', backref="users_organisations")
     projects = db.relationship('Project', backref="users_projects")
     contacts = db.relationship('Contact', backref="users_contacts")
@@ -73,17 +88,18 @@ class User(Base, db.Model):
              namespace='/notifs')
         print('notification was pushed!')
     
-
+    '''
     def __setattr__(self, name, value):
         # Hash password when set it.
         if name == 'password':
             value = generate_password_hash(value)
         super(User, self).__setattr__(name, value)
-
-
+    
     def check_password(self, password):
         return check_password_hash(self.password, password)
+    '''
+
 
 
     def __repr__(self):
-        return '<User %s>' % self.name
+        return '%s' % self.email

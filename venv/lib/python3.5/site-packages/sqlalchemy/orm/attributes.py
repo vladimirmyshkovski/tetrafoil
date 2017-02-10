@@ -1,5 +1,5 @@
 # orm/attributes.py
-# Copyright (C) 2005-2016 the SQLAlchemy authors and contributors
+# Copyright (C) 2005-2017 the SQLAlchemy authors and contributors
 # <see AUTHORS file>
 #
 # This module is part of SQLAlchemy and is released under
@@ -382,7 +382,7 @@ class AttributeImpl(object):
                  parent_token=None, expire_missing=True,
                  send_modified_events=True,
                  **kwargs):
-        """Construct an AttributeImpl.
+        r"""Construct an AttributeImpl.
 
         \class_
           associated class

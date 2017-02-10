@@ -1,0 +1,39 @@
+{
+  "name": "fa-viber",
+  "authors": [
+    "kukac7 <kukac7@gmail.com>"
+  ],
+  "description": "Viber Icon for font awesome",
+  "main": "fa-viber.css",
+  "keywords": [
+    "Viber",
+    "font",
+    "awesome",
+    "fa",
+    "fa-viber"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/kukac7",
+  "devDependencies": {
+    "jquery": "~2.1.4",
+    "bootstrap-sass": "~3.3.5",
+    "font-awesome": "~4.4.0"
+  },
+  "ignore": [
+    "**/.*",
+    "build",
+    "speed",
+    "test",
+    "dist"
+  ],
+  "_release": "fe60b2425b",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "fe60b2425bd4e73bd1af71be7a86657b7ac41381"
+  },
+  "_source": "https://github.com/kukac7/fa-viber.git",
+  "_target": "*",
+  "_originalSource": "fa-viber",
+  "_direct": true
+}

@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+<head>
+    <title>{% block page_title %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}"/>
+    {% block meta %}{% endblock %}
+    <link rel="Shortcut Icon" href="/static/image/favicon.png">
+    {# CSS libs #}
+    <link rel="stylesheet" href="/static/css/libs/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/static/css/libs/font-awesome.min.css"/>
+    {# CSS layout #}
+    <link rel="stylesheet" href="/static/css/bootstrap.theme.css"/>
+    <link rel="stylesheet" href="/static/css/common.css"/>
+    <link rel="stylesheet" href="/static/output/macros.css"/>
+    <link rel="stylesheet" href="/static/css/layout.css"/>
+
+    {# CSS page #}
+    {% block page_css %}{% endblock %}
+    {# JS global vars #}
+    <script type="text/javascript">
+        var g = {
+            domain: "{{ config.SITE_DOMAIN }}",
+            csrfToken: "{{ csrf_token() }}",
+            rules: {{ rules|safe }},
+            method: "{{ request.method }}",
+            signin: {% if g.user %}true{% else %}false{% endif %},
+            userId: {% if g.user %}{{ g.user.id }}{% else %}false{% endif %},
+        };
+    </script>
+    {# JS libs #}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.2/socket.io.min.js"></script>
+    <script src="/static/js/libs/respond.min.js"></script>
+    <script src="/static/js/libs/jquery.min.js"></script>
+    <script src="/static/js/libs/bootstrap.min.js"></script>
+    <script src="/static/js/init.js"></script>
+    {% if g.user %}
+    <script src="/pages/crm/includes/chat/chat.js"/></script>
+    {% endif %}
+
+
+    
+</head>
+
+<body>
+{% if g.user %}
+{% from '_form.html' import vertical_field %}
+{% include 'crm/includes/modals/add_organisation.html' %}
+{% include 'crm/includes/modals/add_contact.html' %}
+{% include 'crm/includes/modals/add_project.html' %}
+{% include 'crm/includes/modals/add_activity.html' %}
+{% include 'crm/includes/modals/add_invoice.html' %}
+{% endif %}
+
+
+{# Flash message #}
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-info flash-message {{category}}">{{message}}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+{% include 'crm/includes/nav/nav.html' %}
+
+{# Please DO NOT change the id below #}
+<div id="main">
+    {% block page_content %}{% endblock %}
+</div>
+
+
+{% if g.user %}
+{% include 'crm/includes/chat/chat.html' %}
+{% endif %}
+{% include 'crm/includes/footer/footer.html' %}
+
+
+
+
+{# JS macros #}
+<script src="/static/output/macros.js"></script>
+
+{# JS page #}
+{% block page_js %}{% endblock %}
+
+
+{# JS layout #}
+<script src="/static/js/layout.js"></script>
+
+{% if g.user %}
+<script type="text/javascript">
+$(document).ready(function() {
+    //WEB_SOCKET_SWF_LOCATION = "/static/WebSocketMain.swf";
+    //WEB_SOCKET_DEBUG = true;
+    var notifs_namespace = '/notifs';
+
+    var socket = io.connect(location.protocol + "//" + location.host + notifs_namespace, {reconnection: false});
+
+    socket.on('response', function(msg) {
+        console.log(msg.meta);
+        // If `msg` is a notification, display it to the user.
+    });
+
+    socket.on('notification', function(msg) {
+        $('#notification-badge').text(msg.notifs.length)
+        $('#notifications-count').text(msg.notifs.length)
+        k = $('#notifications')
+        for (var i = 0; i < 4; i++){
+            k.prepend('<li>' + '<a>' + '<div>' + msg.notifs[i]['title'] + '</div>' + '<div>' + msg.notifs[i]['message'] + '</div>' + '</div>' + msg.notifs[i]['received_at'] + '</div>' + '</a>' + '</li>')
+           }
+       console.log(msg.notifs);
+   });
+});
+</script>
+{% endif %}
+</body>
+</html>

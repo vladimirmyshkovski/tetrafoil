@@ -13,3 +13,14 @@ from .type import *
 from .city import *
 from .country import *
 from .status import *
+from .page import *
+from .category import *
+from .subcategory import *
+from .template import *
+from .product import *
+from .address import *
+from .image import *
+from .message import *
+from .tag import *
+from .size import *
+from .calculator import *

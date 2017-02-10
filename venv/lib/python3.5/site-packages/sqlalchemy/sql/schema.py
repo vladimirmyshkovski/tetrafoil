@@ -1,5 +1,5 @@
 # sql/schema.py
-# Copyright (C) 2005-2016 the SQLAlchemy authors and contributors
+# Copyright (C) 2005-2017 the SQLAlchemy authors and contributors
 # <see AUTHORS file>
 #
 # This module is part of SQLAlchemy and is released under
@@ -116,7 +116,7 @@ class SchemaItem(SchemaEventTarget, visitors.Visitable):
 
 
 class Table(DialectKWArgs, SchemaItem, TableClause):
-    """Represent a table in a database.
+    r"""Represent a table in a database.
 
     e.g.::
 
@@ -485,6 +485,8 @@ class Table(DialectKWArgs, SchemaItem, TableClause):
         autoload = kwargs.pop('autoload', autoload_with is not None)
         # this argument is only used with _init_existing()
         kwargs.pop('autoload_replace', True)
+        _extend_on = kwargs.pop("_extend_on", None)
+
         include_columns = kwargs.pop('include_columns', None)
 
         self.implicit_returning = kwargs.pop('implicit_returning', True)
@@ -504,19 +506,22 @@ class Table(DialectKWArgs, SchemaItem, TableClause):
         # we do it after the table is in the singleton dictionary to support
         # circular foreign keys
         if autoload:
-            self._autoload(metadata, autoload_with, include_columns)
+            self._autoload(
+                metadata, autoload_with,
+                include_columns, _extend_on=_extend_on)
 
         # initialize all the column, etc. objects.  done after reflection to
         # allow user-overrides
         self._init_items(*args)
 
     def _autoload(self, metadata, autoload_with, include_columns,
-                  exclude_columns=()):
+                  exclude_columns=(), _extend_on=None):
 
         if autoload_with:
             autoload_with.run_callable(
                 autoload_with.dialect.reflecttable,
-                self, include_columns, exclude_columns
+                self, include_columns, exclude_columns,
+                _extend_on=_extend_on
             )
         else:
             bind = _bind_or_error(
@@ -528,7 +533,8 @@ class Table(DialectKWArgs, SchemaItem, TableClause):
                 "metadata.bind=<someengine>")
             bind.run_callable(
                 bind.dialect.reflecttable,
-                self, include_columns, exclude_columns
+                self, include_columns, exclude_columns,
+                _extend_on=_extend_on
             )
 
     @property
@@ -557,6 +563,8 @@ class Table(DialectKWArgs, SchemaItem, TableClause):
         autoload = kwargs.pop('autoload', autoload_with is not None)
         autoload_replace = kwargs.pop('autoload_replace', True)
         schema = kwargs.pop('schema', None)
+        _extend_on = kwargs.pop('_extend_on', None)
+
         if schema and schema != self.schema:
             raise exc.ArgumentError(
                 "Can't change schema of existing table from '%s' to '%s'",
@@ -579,12 +587,15 @@ class Table(DialectKWArgs, SchemaItem, TableClause):
 
         if autoload:
             if not autoload_replace:
+                # don't replace columns already present.
+                # we'd like to do this for constraints also however we don't
+                # have simple de-duping for unnamed constraints.
                 exclude_columns = [c.name for c in self.c]
             else:
                 exclude_columns = ()
             self._autoload(
                 self.metadata, autoload_with,
-                include_columns, exclude_columns)
+                include_columns, exclude_columns, _extend_on=_extend_on)
 
         self._extra_kwargs(**kwargs)
         self._init_items(*args)
@@ -882,7 +893,7 @@ class Column(SchemaItem, ColumnClause):
     __visit_name__ = 'column'
 
     def __init__(self, *args, **kwargs):
-        """
+        r"""
         Construct a new ``Column`` object.
 
         :param name: The name of this column as represented in the database.
@@ -1501,7 +1512,7 @@ class ForeignKey(DialectKWArgs, SchemaItem):
                  initially=None, link_to_name=False, match=None,
                  info=None,
                  **dialect_kw):
-        """
+        r"""
         Construct a column-level FOREIGN KEY.
 
         The :class:`.ForeignKey` object when constructed generates a
@@ -2406,7 +2417,7 @@ class Constraint(DialectKWArgs, SchemaItem):
     def __init__(self, name=None, deferrable=None, initially=None,
                  _create_rule=None, info=None, _type_bound=False,
                  **dialect_kw):
-        """Create a SQL constraint.
+        r"""Create a SQL constraint.
 
         :param name:
           Optional, the in-database name of this ``Constraint``.
@@ -2593,7 +2604,7 @@ class ColumnCollectionConstraint(ColumnCollectionMixin, Constraint):
     """A constraint that proxies a ColumnCollection."""
 
     def __init__(self, *columns, **kw):
-        """
+        r"""
         :param \*columns:
           A sequence of column names or Column objects.
 
@@ -2660,7 +2671,7 @@ class CheckConstraint(ColumnCollectionConstraint):
     def __init__(self, sqltext, name=None, deferrable=None,
                  initially=None, table=None, info=None, _create_rule=None,
                  _autoattach=True, _type_bound=False):
-        """Construct a CHECK constraint.
+        r"""Construct a CHECK constraint.
 
         :param sqltext:
           A string containing the constraint definition, which will be used
@@ -2748,7 +2759,7 @@ class ForeignKeyConstraint(ColumnCollectionConstraint):
                  ondelete=None, deferrable=None, initially=None,
                  use_alter=False, link_to_name=False, match=None,
                  table=None, info=None, **dialect_kw):
-        """Construct a composite-capable FOREIGN KEY.
+        r"""Construct a composite-capable FOREIGN KEY.
 
         :param columns: A sequence of local column names. The named columns
           must be defined and present in the parent Table. The names should
@@ -3267,7 +3278,7 @@ class Index(DialectKWArgs, ColumnCollectionMixin, SchemaItem):
     __visit_name__ = 'index'
 
     def __init__(self, name, *expressions, **kw):
-        """Construct an index object.
+        r"""Construct an index object.
 
         :param name:
           The name of the index
@@ -3693,7 +3704,7 @@ class MetaData(SchemaItem):
                 extend_existing=False,
                 autoload_replace=True,
                 **dialect_kwargs):
-        """Load all available table definitions from the database.
+        r"""Load all available table definitions from the database.
 
         Automatically creates ``Table`` entries in this ``MetaData`` for any
         table available in the database but not yet present in the
@@ -3758,7 +3769,8 @@ class MetaData(SchemaItem):
                 'autoload': True,
                 'autoload_with': conn,
                 'extend_existing': extend_existing,
-                'autoload_replace': autoload_replace
+                'autoload_replace': autoload_replace,
+                '_extend_on': set()
             }
 
             reflect_opts.update(dialect_kwargs)
@@ -3799,8 +3811,8 @@ class MetaData(SchemaItem):
                     s = schema and (" schema '%s'" % schema) or ''
                     raise exc.InvalidRequestError(
                         'Could not reflect: requested table(s) not available '
-                        'in %s%s: (%s)' %
-                        (bind.engine.url, s, ', '.join(missing)))
+                        'in %r%s: (%s)' %
+                        (bind.engine, s, ', '.join(missing)))
                 load = [name for name in only if extend_existing or
                         name not in current]
 

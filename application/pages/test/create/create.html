@@ -1,0 +1,23 @@
+{% extends 'admin/layout.html' %}
+{% from '_form.html' import vertical_field, form_submit %}
+
+{% block page_title %}Создание{% endblock %}
+{% block page_content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8">
+                <h1>Создать</h1>
+                <form method="post" action="{{url_for('admin.create_template')}}">
+                    {{ form.csrf_token() }}
+                    {% for i in form %}
+                    {% if i.id == 'csrf_token' %}
+                    {% else %}
+                    {{ vertical_field(i) }}
+                    {% endif %}
+                    {% endfor %} 
+                    <button type="submit" class="btn btn-primary">Создать</button>
+				</form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

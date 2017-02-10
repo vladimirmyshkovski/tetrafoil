@@ -1,5 +1,5 @@
 # postgresql/ext.py
-# Copyright (C) 2005-2016 the SQLAlchemy authors and contributors
+# Copyright (C) 2005-2017 the SQLAlchemy authors and contributors
 # <see AUTHORS file>
 #
 # This module is part of SQLAlchemy and is released under
@@ -81,7 +81,7 @@ static/sql-createtable.html#SQL-CREATETABLE-EXCLUDE
     where = None
 
     def __init__(self, *elements, **kw):
-        """
+        r"""
         :param \*elements:
           A sequence of two tuples of the form ``(column, operator)`` where
           column must be a column name or Column object and operator must

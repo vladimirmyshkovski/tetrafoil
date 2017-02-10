@@ -1,0 +1,9 @@
+.slider-wrapper {
+  margin: 50px 0 30px 30px;
+  position: relative;
+  width: 100%;
+}
+.vertical-wrapper {
+  height: 50rem;
+  width: auto;
+}

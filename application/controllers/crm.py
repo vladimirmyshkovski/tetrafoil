@@ -4,9 +4,15 @@ from ..utils.account import signin_user, signout_user
 from ..utils.permissions import VisitorPermission, UserPermission
 from ..models import db, User, Organisation, Contact, Project, Activity, Invoice, Base, Notification, Leed, Status, City, Country, Type, Role
 from ..forms import AddOrganisationForm, AddContactForm, AddProjectForm, AddActivityForm, AddInvoiceForm, AddLeedForm
+from flask_security.decorators import roles_required
+bp = Blueprint('crm', __name__, url_prefix='/crm')
 
-bp = Blueprint('crm', __name__)
 
+@bp.route('/dashboard', methods=['GET', 'POST', 'PUT'])
+@roles_required('superadmin')
+def dashboard():
+    """Dashboard page"""
+    return render_template('/crm/layout.html')
 
 @bp.route('/post', methods=['GET', 'POST', 'PUT'])
 @UserPermission()
@@ -27,18 +33,18 @@ def post():
     return render_template('site/index/index.html')
 
 
-@bp.route('/crm', methods=['GET', 'POST'])
+@bp.route('/chat', methods=['GET', 'POST'])
 @UserPermission()
-def crm():
-    """Index page"""
-    return render_template('site/index/index.html')
+def chat():
+    """Chat page"""
+    return render_template('crm/includes/chat/chat.html')
 
 
 @bp.route('/add/<keyword>', methods=['GET', 'POST'])
 @UserPermission()
 def add(keyword):
     """Add """
-    baselist = [User, Organisation, Contact, Project, Activity, Invoice, Base, Notification, Leed, Status, City, Country, Type, Role]
+    baselist = [User, Organisation, Contact, Project, Activity, Invoice, Notification, Leed, Status, City, Country, Type, Role]
     formlist = [AddOrganisationForm, AddContactForm, AddProjectForm, AddActivityForm, AddInvoiceForm, AddLeedForm]
     for i in baselist:
         if str(i.__tablename__) == keyword:
@@ -64,23 +70,16 @@ def add(keyword):
 
 
 @bp.route('/view/<keyword>', methods=['GET', 'POST'])
-@UserPermission()
+@roles_required('superadmin')
 def view(keyword):
     """View"""
-    user_room = 'user_{}'.format(session['user_id'])
-    print(user_room)
-    print('какого хуя перезагружается роут блеач?')
     user = User.query.get(g.user.id)
     baselist = [User, Organisation, Contact, Project, Activity, Invoice, Notification, Leed]
     for i in baselist:
         if str(i.__tablename__) == keyword:
-            table = i.query.filter_by(created_by=g.user.id).all()
+            if keyword == 'user':
+                table = i.query.all()
+            else:
+                table = i.query.filter_by(created_by=g.user.id).all()
             columns = [o.key for o in i.__table__.columns]
     return render_template('crm/view/view.html', columns=columns, table=table, keyword=keyword)
-
-'''
-@bp.route('/update/<table>/<id>', methods=['GET', 'POST'])
-@UserPermission()
-def update(table, id):
-    pass
-'''

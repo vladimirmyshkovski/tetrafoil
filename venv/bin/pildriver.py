@@ -1,4 +1,4 @@
-#!/home/narnik/Программы/FlaskProjects/flask-crm/flask-crm/venv/bin/python
+#!/home/narnik/Программы/FlaskProjects/ttt/venv/bin/python
 """PILdriver, an image-processing calculator using PIL.
 
 An instance of class PILDriver is essentially a software stack machine

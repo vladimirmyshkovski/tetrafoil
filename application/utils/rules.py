@@ -29,11 +29,8 @@ class ManagerRule(Rule):
     def check(self):
         user_id = int(session['user_id'])
         user = User.query.filter(User.id == user_id, ).first()
-        if user.role == 1:
-            user.role = True
-        else: 
-            user.role = False
-        return user and user.role
+        if user.role == 1 or user.role > 1:
+            return user and user.role
 
     def deny(self):
         abort(403)
@@ -46,11 +43,8 @@ class AdminRule(Rule):
     def check(self):
         user_id = int(session['user_id'])
         user = User.query.filter(User.id == user_id, ).first()
-        if user.role == 2:
-            user.role = True
-        else: 
-            user.role = False
-        return user and user.role
+        if user.role == 2 or user.role > 2:
+            return user and user.role
 
     def deny(self):
         abort(403)
@@ -60,13 +54,10 @@ class SuperAdminRule(Rule):
         return UserRule()
 
     def check(self):
-        if user.role == 3:
-            user.role = True
-        else: 
-            user.role = False
         user_id = int(session['user_id'])
         user = User.query.filter(User.id == user_id, ).first()
-        return user and user.role
+        if user.role == 3 or user.role > 3:
+            return user and user.role
 
     def deny(self):
         abort(403)

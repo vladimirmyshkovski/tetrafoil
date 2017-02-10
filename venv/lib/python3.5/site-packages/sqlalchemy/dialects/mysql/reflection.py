@@ -1,5 +1,5 @@
 # mysql/reflection.py
-# Copyright (C) 2005-2016 the SQLAlchemy authors and contributors
+# Copyright (C) 2005-2017 the SQLAlchemy authors and contributors
 # <see AUTHORS file>
 #
 # This module is part of SQLAlchemy and is released under
@@ -359,6 +359,7 @@ class MySQLTableDefinitionParser(object):
             r'(?: +USING +(?P<using_post>\S+))?'
             r'(?: +KEY_BLOCK_SIZE *[ =]? *(?P<keyblock>\S+))?'
             r'(?: +WITH PARSER +(?P<parser>\S+))?'
+            r'(?: +COMMENT +(?P<comment>(\x27\x27|\x27([^\x27])*?\x27)+))?'
             r',?$'
             % quotes
         )

@@ -1,5 +1,5 @@
 # engine/default.py
-# Copyright (C) 2005-2016 the SQLAlchemy authors and contributors
+# Copyright (C) 2005-2017 the SQLAlchemy authors and contributors
 # <see AUTHORS file>
 #
 # This module is part of SQLAlchemy and is released under
@@ -366,9 +366,10 @@ class DefaultDialect(interfaces.Dialect):
         return sqltypes.adapt_type(typeobj, self.colspecs)
 
     def reflecttable(
-            self, connection, table, include_columns, exclude_columns):
+            self, connection, table, include_columns, exclude_columns, **opts):
         insp = reflection.Inspector.from_engine(connection)
-        return insp.reflecttable(table, include_columns, exclude_columns)
+        return insp.reflecttable(
+            table, include_columns, exclude_columns, **opts)
 
     def get_pk_constraint(self, conn, table_name, schema=None, **kw):
         """Compatibility method, adapts the result of get_primary_keys()

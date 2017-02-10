@@ -1,5 +1,5 @@
 # orm/__init__.py
-# Copyright (C) 2005-2016 the SQLAlchemy authors and contributors
+# Copyright (C) 2005-2017 the SQLAlchemy authors and contributors
 # <see AUTHORS file>
 #
 # This module is part of SQLAlchemy and is released under
@@ -71,7 +71,7 @@ from . import strategies as _strategies
 
 
 def create_session(bind=None, **kwargs):
-    """Create a new :class:`.Session`
+    r"""Create a new :class:`.Session`
     with no automation enabled by default.
 
     This function is used primarily for testing.   The usual
@@ -159,7 +159,7 @@ def backref(name, **kwargs):
 
 
 def deferred(*columns, **kw):
-    """Indicate a column-based mapped attribute that by default will
+    r"""Indicate a column-based mapped attribute that by default will
     not load unless accessed.
 
     :param \*columns: columns to be mapped.  This is typically a single

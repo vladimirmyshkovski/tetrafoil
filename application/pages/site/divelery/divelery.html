@@ -1,0 +1,40 @@
+{% extends "/site/layout.html" %}
+{% block page_css %}
+{% endblock %}
+{% block page_title %}{{keyword}}{% endblock %}
+{% block page_js %} 
+{% endblock %}
+{% block page_content %}
+{% from '_form.html' import site_form_field %}
+<style>
+    .ccenter {
+        text-align: center;
+    }
+</style>
+<article class="main-content">
+    <div class="container"  style="margin-top: 10rem">
+        <h1 style="color: white">Доставка и оплата</h1>
+        <div class="col-lg-5">
+        <p>
+</p>
+        <p>Оплата товара, сроки его изготовления и последующая доставка прописываются в двустороннем договоре о сотрудничестве.
+        </p>
+        <p>Вы можете внести наличные деньги в кассу, либо перечислить на банковский счет компании. </p>
+        <h2  style="font-size: 20px">Варианты доставки:</h2>
+<ul class="ulabout">
+    <li class="fontsize16">Самовывоз со склада;</li>
+    <li class="fontsize16">Доставка транспортными компаниями; </li>
+    <li class="fontsize16">Курьерская доставка по Москве.</li>
+</ul>
+</div>
+<div class="col-lg-3 col-lg-offset-3 ccenter">
+<img src="/static/img/block_5.png">
+</div>
+
+<div class="col-lg-12">
+<p>Мы готовы организовать доставку заказа удобной для вас транспортной компанией, почтовой либо курьерской службой. </p>
+</div>
+</div>
+
+</article>
+{% endblock %}
