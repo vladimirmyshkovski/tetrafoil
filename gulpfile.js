@@ -67,21 +67,21 @@ gulp.task('image-png', function () {
     .src(path.join(root, 'static/img/**/*.png'))
     .pipe(plumber())
     .pipe(image({
-        pngquant: true,
+        pngquant: false,
         optipng: false,
-        zopflipng: true,
+        zopflipng: false,
         jpegRecompress: false,
-        jpegoptim: true,
-        mozjpeg: true,
-        gifsicle: true,
-        svgo: true,
+        jpegoptim: false,
+        mozjpeg: false,
+        gifsicle: false,
+        svgo: false,
         concurrent: 10
     }))
     .pipe(rename(function (path) {
         path.extname = ".css";
         return path;
     }))
-    .pipe(gulp.dest(path.join(root, 'static/img')));
+    .pipe(gulp.dest(path.join(root, 'static/output/small-img')));
 });
 
 gulp.task('build', ['macros-css', 'macros-js', 'pages-css', 'global-css', 'image-png']);
