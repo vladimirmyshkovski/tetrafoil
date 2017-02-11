@@ -60,7 +60,21 @@ gulp.task('global-css', function () {
         .pipe(gulp.dest(path.join(root, 'static/css')));
 });
 
-gulp.task('build', ['macros-css', 'macros-js', 'pages-css', 'global-css']);
+gulp.task('img', function () {
+    return gulp
+        .src(path.join(root, 'static/img/**/*.png'))
+        .pipe(plumber())
+        .pipe(less({
+            paths: [path.join(root, 'static/img')]
+        }))
+        .pipe(rename(function (path) {
+            path.extname = ".png";
+            return path;
+        }))
+        .pipe(gulp.dest(path.join(root, 'static/img')));
+});
+
+gulp.task('build', ['macros-css', 'macros-js', 'pages-css', 'global-css', 'img']);
 
 gulp.task('watch', ['build'], function () {
     watch(path.join(root, 'macros/**/_*.js'), batch(function (events, done) {
