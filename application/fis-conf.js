@@ -22,3 +22,4 @@ fis.config.set('pack', {
         'static/css/layout.css'
     ]
 });
+fis.config.set('project.fileType.image', 'swf, cur, ico, jpeg, jpg, png' );
