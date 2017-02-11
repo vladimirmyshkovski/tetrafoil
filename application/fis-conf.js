@@ -1,14 +1,6 @@
 fis.config.set('project.include', ['pages/**', 'macros/**', 'static/**']);
-fis.config.set('project.exclude', ['pages/**.less', 'macros/**.less', 'static/**.less']);
-//fis.config.set('project.fileType.image', 'swf, cur, ico, jpeg, jpg, png' );
+fis.config.set('project.exclude', ['pages/**.less', 'macros/**.less', 'static/**.less', 'static/**.png', 'static/**.jpg']);
 fis.config.set('modules.postpackager', 'simple');
-//fis.config.merge({
-//    modules : {
-//        preprocessor : {
-//            css : 'image-set'
-//        }
-//    }
-//});
 fis.config.set('pack', {
     'pkg/libs.js': [
         'static/js/libs/jquery.min.js',
@@ -30,8 +22,3 @@ fis.config.set('pack', {
         'static/css/layout.css'
     ]
 });
-//fis.match('**.(png|gif|jpeg|jpg)', {
-//    optimizer: fis.plugin('png-compressor'),
-//    useHash: true,
-//    release: '/static/new/images/$&'
-//});

@@ -65,6 +65,7 @@ gulp.task('global-css', function () {
 gulp.task('image-png', function () {
     return gulp
     .src(path.join(root, 'static/img/**/*.png'))
+    .pipe(plumber())
     .pipe(image({
         pngquant: true,
         optipng: false,
