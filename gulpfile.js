@@ -64,7 +64,7 @@ gulp.task('global-css', function () {
 
 gulp.task('image', function () {
     return gulp
-    .src(path.join(root, 'static/image/*'))
+    .src(path.join(root, 'static/image/**/*'))
     .pipe(image({
           pngquant: true,
           optipng: false,
@@ -81,7 +81,7 @@ gulp.task('image', function () {
 
 gulp.task('img', function () {
     return gulp
-    .src(path.join(root, 'static/img/*'))
+    .src(path.join(root, 'static/image/**/*'))
     .pipe(image({
           pngquant: true,
           optipng: false,
