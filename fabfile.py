@@ -18,7 +18,6 @@ def deploy():
                 run('pip install -r requirements.txt')
                 run('python manage.py db upgrade')
                 run('python manage.py build')
-            run('redis-server')
             run('supervisorctl restart ttt')
 
 
