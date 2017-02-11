@@ -40,12 +40,23 @@
     <script src="/static/js/libs.min.js"></script>
     <script src="/static/js/scripts.js"></script>
     <script src="http://malsup.github.com/jquery.form.js"></script> 
+    <script src="https://cdn.ravenjs.com/2.3.0/raven.min.js"></script>
 
 
 
     <script>
     new WOW().init();
     </script>
+
+
+    {% if event_id %}
+      <script>
+      Raven.showReportDialog({
+        eventId: '{{ event_id }}',
+        dsn: '{{ public_dsn }}'
+      });
+      </script>
+    {% endif %}
 
 </head>
 
