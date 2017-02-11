@@ -81,7 +81,7 @@ gulp.task('image', function () {
 
 gulp.task('img', function () {
     return gulp
-    .src(path.join(root, 'static/image/**/*'))
+    .src(path.join(root, 'static/img/**/*'))
     .pipe(image({
           pngquant: true,
           optipng: false,
