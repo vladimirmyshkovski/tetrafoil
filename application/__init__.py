@@ -66,7 +66,6 @@ def create_app():
 
         # Serve static files
         app.wsgi_app = SharedDataMiddleware(app.wsgi_app, {
-            '/static/img': os.path.join(app.config.get('PROJECT_PATH'), 'output/static/img'),
             '/static': os.path.join(app.config.get('PROJECT_PATH'), 'output/static'),
             '/pkg': os.path.join(app.config.get('PROJECT_PATH'), 'output/pkg'),
             '/pages': os.path.join(app.config.get('PROJECT_PATH'), 'output/pages')
