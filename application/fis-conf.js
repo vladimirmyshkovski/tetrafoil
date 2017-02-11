@@ -1,5 +1,6 @@
 fis.config.set('project.include', ['pages/**', 'macros/**', 'static/**']);
 fis.config.set('project.exclude', ['pages/**.less', 'macros/**.less', 'static/**.less']);
+fis.config.set('project.fileType.image', 'swf, cur, ico, jpeg, jpg, png' );
 fis.config.set('modules.postpackager', 'simple');
 fis.config.set('pack', {
     'pkg/libs.js': [
@@ -22,4 +23,3 @@ fis.config.set('pack', {
         'static/css/layout.css'
     ]
 });
-fis.config.set('project.fileType.image', 'swf, cur, ico, jpeg, jpg, png' );
