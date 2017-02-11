@@ -76,7 +76,7 @@ gulp.task('image', function () {
           svgo: true,
           concurrent: 10
     }))
-    .pipe(gulp.dest('/output/static/image'));
+    .pipe(gulp.dest('./output/static/image'));
 });
 
 gulp.task('img', function () {
@@ -93,7 +93,7 @@ gulp.task('img', function () {
           svgo: true,
           concurrent: 10
     }))
-    .pipe(gulp.dest('/output/static/img'));
+    .pipe(gulp.dest('./output/static/img'));
 });
 
 gulp.task('build', ['image', 'img', 'macros-css', 'macros-js', 'pages-css', 'global-css']);
