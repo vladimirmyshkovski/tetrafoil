@@ -9,8 +9,7 @@ var header = require('gulp-header');
 var footer = require('gulp-footer');
 var rename = require("gulp-rename");
 var image = require("gulp-image");
-var change = require("gulp-change");
-
+var changed = require('gulp-changed');
 
 
 var root = './application';
