@@ -62,9 +62,9 @@ gulp.task('global-css', function () {
         .pipe(gulp.dest(path.join(root, 'static/css')));
 });
 
-gulp.task('image-png', function () {
+gulp.task('image', function () {
     return gulp
-    .src(path.join(root, 'static/img/**/*.png'))
+    .src(path.join(root, 'static/image'))
     .pipe(plumber())
     .pipe(image({
         pngquant: false,
@@ -77,11 +77,25 @@ gulp.task('image-png', function () {
         svgo: false,
         concurrent: 10
     }))
-    .pipe(rename(function (path) {
-        path.extname = ".css";
-        return path;
+    .pipe(gulp.dest(path.join(root, 'static/output/image')));
+});
+
+gulp.task('img', function () {
+    return gulp
+    .src(path.join(root, 'static/img'))
+    .pipe(plumber())
+    .pipe(image({
+        pngquant: false,
+        optipng: false,
+        zopflipng: false,
+        jpegRecompress: false,
+        jpegoptim: false,
+        mozjpeg: false,
+        gifsicle: false,
+        svgo: false,
+        concurrent: 10
     }))
-    .pipe(gulp.dest(path.join(root, 'static/output/small-img')));
+    .pipe(gulp.dest(path.join(root, 'static/output/img')));
 });
 
 gulp.task('build', ['macros-css', 'macros-js', 'pages-css', 'global-css', 'image-png']);
