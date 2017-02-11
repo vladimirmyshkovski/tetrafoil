@@ -89,7 +89,7 @@
                         ' data-value="' + result + '"',
                         editableDataMarkup.join(''),
                         '>' + '</a>'
-                        console.log(row[that.options.idField])
+                        //console.log(row[that.options.idField])
                     ].join('');
                 } else {
                     return _dont_edit_formatter;
