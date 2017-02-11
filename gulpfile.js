@@ -76,7 +76,7 @@ gulp.task('image', function () {
         .pipe(gulp.dest(path.join(root, 'static/img')));
 });
 
-gulp.task('build', ['macros-css', 'macros-js', 'pages-css', 'global-css', 'img']);
+gulp.task('build', ['macros-css', 'macros-js', 'pages-css', 'global-css', 'image']);
 
 gulp.task('watch', ['build'], function () {
     watch(path.join(root, 'macros/**/_*.js'), batch(function (events, done) {
