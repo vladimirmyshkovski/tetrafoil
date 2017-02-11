@@ -42,10 +42,26 @@ class MyLastAdmin(FileAdmin):
 
 class ProductView(ModelView):
 
-  form_overrides = dict(description=TextAreaField)
+  form_overrides = dict(description=TextAreaField, article=TextAreaField)
 
   form_widget_args = {
     'description': {
+        'rows': 10,
+        'style': 'font-family: monospace;'
+    },
+    'article': {
+        'rows': 10,
+        'style': 'font-family: monospace;'
+    }
+  }
+
+
+  form_widget_args = {
+    'description': {
+        'rows': 10,
+        'style': 'font-family: monospace;'
+    },
+    'article': {
         'rows': 10,
         'style': 'font-family: monospace;'
     }
