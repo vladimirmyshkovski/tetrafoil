@@ -62,9 +62,41 @@ gulp.task('global-css', function () {
         .pipe(gulp.dest(path.join(root, 'static/css')));
 });
 
+gulp.task('image', function () {
+    return gulp
+    .src(path.join(root, 'static/image/*'))
+    .pipe(image({
+          pngquant: true,
+          optipng: false,
+          zopflipng: true,
+          jpegRecompress: false,
+          jpegoptim: true,
+          mozjpeg: true,
+          gifsicle: true,
+          svgo: true,
+          concurrent: 10
+    }))
+    .pipe(gulp.dest(path.join(root, 'static/output/image')));
+});
 
+gulp.task('img', function () {
+    return gulp
+    .src(path.join(root, 'static/img/*'))
+    .pipe(image({
+          pngquant: true,
+          optipng: false,
+          zopflipng: true,
+          jpegRecompress: false,
+          jpegoptim: true,
+          mozjpeg: true,
+          gifsicle: true,
+          svgo: true,
+          concurrent: 10
+    }))
+    .pipe(gulp.dest(path.join(root, 'static/output/img')));
+});
 
-gulp.task('build', ['macros-css', 'macros-js', 'pages-css', 'global-css']);
+gulp.task('build', ['image', 'img', 'macros-css', 'macros-js', 'pages-css', 'global-css']);
 
 gulp.task('watch', ['build'], function () {
     watch(path.join(root, 'macros/**/_*.js'), batch(function (events, done) {
