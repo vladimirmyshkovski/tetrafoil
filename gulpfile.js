@@ -67,15 +67,15 @@ gulp.task('image', function () {
     .src(path.join(root, 'static/image'))
     .pipe(plumber())
     .pipe(image({
-        pngquant: false,
-        optipng: false,
-        zopflipng: false,
-        jpegRecompress: false,
-        jpegoptim: false,
-        mozjpeg: false,
-        gifsicle: false,
-        svgo: false,
-        concurrent: 10
+          pngquant: true,
+          optipng: false,
+          zopflipng: true,
+          jpegRecompress: false,
+          jpegoptim: true,
+          mozjpeg: true,
+          gifsicle: true,
+          svgo: true,
+          concurrent: 10
     }))
     .pipe(gulp.dest(path.join(root, 'static/output/image')));
 });
@@ -85,15 +85,15 @@ gulp.task('img', function () {
     .src(path.join(root, 'static/img'))
     .pipe(plumber())
     .pipe(image({
-        pngquant: false,
-        optipng: false,
-        zopflipng: false,
-        jpegRecompress: false,
-        jpegoptim: false,
-        mozjpeg: false,
-        gifsicle: false,
-        svgo: false,
-        concurrent: 10
+          pngquant: true,
+          optipng: false,
+          zopflipng: true,
+          jpegRecompress: false,
+          jpegoptim: true,
+          mozjpeg: true,
+          gifsicle: true,
+          svgo: true,
+          concurrent: 10
     }))
     .pipe(gulp.dest(path.join(root, 'static/output/img')));
 });
