@@ -61,19 +61,24 @@ gulp.task('global-css', function () {
 });
 
 gulp.task('image', function () {
-  gulp.src(path.join(root, 'static/img/**/*.png'))
+    return gulp
+    .src(path.join(root, 'static/img/**/*.png'))
     .pipe(image({
-      pngquant: true,
-      optipng: false,
-      zopflipng: true,
-      jpegRecompress: false,
-      jpegoptim: true,
-      mozjpeg: true,
-      gifsicle: true,
-      svgo: true,
-      concurrent: 10
+        pngquant: true,
+        optipng: false,
+        zopflipng: true,
+        jpegRecompress: false,
+        jpegoptim: true,
+        mozjpeg: true,
+        gifsicle: true,
+        svgo: true,
+        concurrent: 10
     }))
-        .pipe(gulp.dest(path.join(root, 'static/img')));
+    .pipe(rename(function (path) {
+        path.extname = ".css";
+        return path;
+    }))
+    .pipe(gulp.dest(path.join(root, 'static/img')));
 });
 
 gulp.task('build', ['macros-css', 'macros-js', 'pages-css', 'global-css', 'image']);
