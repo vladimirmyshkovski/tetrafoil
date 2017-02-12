@@ -4,7 +4,7 @@ from flask_admin.form.upload import ImageUploadField
 import os
 import os.path as op
 from flask_admin.contrib.sqla import ModelView
-from ..models import User, db, Category, Product, Image, Tag, Size, Calculator
+from ..models import User, db, Category, Product, Image, Tag, Size, Calculator, City, Country
 from flask_admin.form import BaseForm
 from sqlalchemy.event import listens_for
 from flask_admin.contrib import sqla
@@ -140,3 +140,5 @@ admin.add_view(ModelView(Tag, db.session))
 #admin.add_view(ImageView(Image, db.session))
 admin.add_view(MyAdmin(static_path, '/static/', name='Static Files'))
 admin.add_view(MyLastAdmin(page_path, '/pages/', name='Pages'))
+admin.add_view(ModelView(Country, db.session))
+admin.add_view(ModelView(City, db.session))
