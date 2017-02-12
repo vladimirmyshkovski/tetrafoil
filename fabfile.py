@@ -21,8 +21,8 @@ def deploy():
                 run('python manage.py db upgrade')
                 run('python manage.py build')
             run('supervisorctl restart ttt')
-            run('sudo chmod 654 -R /var/www/tetrafoil')
-            print('!!! chmod in /var/www/tetrafoil changet to 654 !!!')
+            #run('sudo chmod 654 -R /var/www/tetrafoil')
+            #print('!!! chmod in /var/www/tetrafoil changet to 654 !!!')
 
 
 def restart():
