@@ -21,6 +21,8 @@ page_path = op.join(op.dirname(__file__), '../pages')
 product_path = op.join(op.dirname(__file__), '../static/img/product_images')
 category_path = op.join(op.dirname(__file__), '../static/img/category_images')
 
+file_path = op.join(op.dirname(__file__), '/static/img/product_images')
+
 
 @babel.localeselector
 def get_locale():
@@ -127,6 +129,36 @@ class CategoryView(ModelView):
   column_exclude_list = ('created_at', 'modified_at')
 
 
+class ImageView(ModelView):
+  form_overrides = {
+  'path': form.FileUploadField
+  }
+
+  form_args = {
+  'path': {
+  'label': 'File',
+  'base_path': 'img/product_images/',
+  'allow_overwrite': False
+  }
+  }
+  def _list_thumbnail(view, context, model, name):
+    if not model.path:
+      return ''
+
+      return Markup('<img src="%s">' % url_for('static',
+                                                 filename=form.thumbgen_filename(model.path)))
+
+    column_formatters = {
+    'path': _list_thumbnail
+    }
+
+    # Alternative way to contribute field is to override it completely.
+    # In this case, Flask-Admin won't attempt to merge various parameters for the field.
+    form_extra_fields = {
+        'path': form.ImageUploadField('Image',
+                                      base_path=file_path,
+                                      thumbnail_size=(100, 100, True))
+    }
 
 
 
@@ -134,8 +166,8 @@ admin.add_view(ProductView(Product, db.session))
 admin.add_view(CategoryView(Category, db.session))
 admin.add_view(ModelView(Size, db.session))
 admin.add_view(ModelView(Tag, db.session))
-admin.add_view(ModelView(Image, db.session))
-#admin.add_view(ImageView(Image, db.session))
+#admin.add_view(ModelView(Image, db.session))
+admin.add_view(ImageView(Image, db.session))
 admin.add_view(MyAdmin(static_path, '/static/', name='Static Files'))
 admin.add_view(MyLastAdmin(page_path, '/pages/', name='Pages'))
 admin.add_view(ModelView(Country, db.session))
