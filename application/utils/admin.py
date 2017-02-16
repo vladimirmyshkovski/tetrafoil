@@ -20,7 +20,6 @@ static_path = op.join(op.dirname(__file__), '../static')
 page_path = op.join(op.dirname(__file__), '../pages')
 product_path = op.join(op.dirname(__file__), '../static/img/product_images')
 category_path = op.join(op.dirname(__file__), '../static/img/category_images')
-
 file_path = op.join(op.dirname(__file__), '/static/img/product_images')
 
 

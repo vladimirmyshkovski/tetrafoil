@@ -7,7 +7,7 @@ from .base import *
 class Tag(Base):
     name = db.Column(db.String(50), unique=True)
     description = db.Column(db.String(2500))
-    image = db.Column(db.Integer, db.ForeignKey('image.id'))
+    images = db.relationship('Image', backref='image_tags')
     product = db.Column(db.Integer, db.ForeignKey('product.id'))
 
 
