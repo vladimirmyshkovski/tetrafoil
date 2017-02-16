@@ -12,4 +12,4 @@ class Tag(Base):
 
 
     def __repr__(self):
-        return '%s' % self.id
+        return '%s' % self.name

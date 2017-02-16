@@ -66,7 +66,7 @@ class ProductView(ModelView):
       return ''
 
     return Markup('<img src="%s">' % url_for('static',
-      filename=form.thumbgen_filename(model.path)))
+      filename=form.thumbgen_filename('img/product_images/')))
 
   inline_models = [(Image,
     dict(
