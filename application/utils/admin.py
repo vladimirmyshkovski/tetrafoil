@@ -127,8 +127,7 @@ class CategoryView(ModelView):
   column_exclude_list = ('created_at', 'modified_at')
 
 
-class ProductView(ModelView):
-  column_exclude_list = ('created_at', 'modified_at')
+
 
 
 admin.add_view(ProductView(Product, db.session))
