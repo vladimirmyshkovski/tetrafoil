@@ -17,4 +17,4 @@ class Calculator(Base):
 
 
     def __repr__(self):
-        return '<Calculator %s>' % self.name
+        return '<Calculator %s>' % self.product
