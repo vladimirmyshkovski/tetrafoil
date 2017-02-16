@@ -126,6 +126,11 @@ class CategoryView(ModelView):
   form_excluded_columns = ['created_at', 'modified_at']
   column_exclude_list = ('created_at', 'modified_at')
 
+
+class ProductView(ModelView):
+  column_exclude_list = ('created_at', 'modified_at')
+
+
 admin.add_view(ProductView(Product, db.session))
 admin.add_view(CategoryView(Category, db.session))
 admin.add_view(ModelView(Size, db.session))
