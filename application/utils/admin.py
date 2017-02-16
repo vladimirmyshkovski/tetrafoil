@@ -59,22 +59,6 @@ class ProductView(ModelView):
     }
   }
 
-
-  form_widget_args = {
-    'description': {
-        'rows': 10,
-        'style': 'font-family: monospace;'
-    },
-    'property': {
-        'rows': 10,
-        'style': 'font-family: monospace;'
-    },
-    'article': {
-        'rows': 10,
-        'style': 'font-family: monospace;'
-    }
-  }
-
   column_display_all_relations = True
 
   def _list_thumbnail(view, context, model, name):
@@ -106,6 +90,7 @@ class ProductView(ModelView):
 
   form_excluded_columns = ['created_at', 'modified_at', 'size']
   column_exclude_list = ('created_at', 'modified_at', 'size')
+
 
 
 class CategoryView(ModelView):
@@ -145,6 +130,7 @@ admin.add_view(ProductView(Product, db.session))
 admin.add_view(CategoryView(Category, db.session))
 admin.add_view(ModelView(Size, db.session))
 admin.add_view(ModelView(Tag, db.session))
+admin.add_view(ModelView(Image, db.session))
 #admin.add_view(ImageView(Image, db.session))
 admin.add_view(MyAdmin(static_path, '/static/', name='Static Files'))
 admin.add_view(MyLastAdmin(page_path, '/pages/', name='Pages'))
