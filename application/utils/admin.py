@@ -33,12 +33,15 @@ def get_locale():
     return session.get('lang', 'ru')
 
 
+
 class MyAdmin(FileAdmin):
 	editable_extensions = ('md', 'html', 'txt', 'js', 'css')
 
 
+
 class MyLastAdmin(FileAdmin):
 	editable_extensions = ('md', 'html', 'txt', 'js', 'css')
+
 
 
 class ProductView(ModelView):
@@ -61,6 +64,8 @@ class ProductView(ModelView):
   }
 
   column_display_all_relations = True
+
+
 
   def _list_thumbnail(view, context, model, name):
     if not model.path:
@@ -103,6 +108,7 @@ class CategoryView(ModelView):
     if not model.path:
       return ''
 
+
     return Markup('<img src="%s">' % url_for('static',
       filename=form.thumbgen_filename(model.path)))
 
@@ -126,6 +132,7 @@ class CategoryView(ModelView):
 
   form_excluded_columns = ['created_at', 'modified_at']
   column_exclude_list = ('created_at', 'modified_at')
+
 
 
 class ImageView(ModelView):
