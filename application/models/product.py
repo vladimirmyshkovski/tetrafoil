@@ -11,10 +11,9 @@ class Product(Base):
     article = db.Column(db.String(2500))
     price = db.Column(db.String(10))
     category = db.Column(db.Integer, db.ForeignKey('category.id'))
-    image = db.relationship('Image', backref='product_images')
-    tags = db.relationship('Tag', backref='products_tags')
-    size = db.relationship('Size', backref='products_sizes')
-    calculator = db.relationship('Calculator', backref='products_calculator')
+    image = db.relationship('Image', backref='Картинки продукта')
+    tags = db.relationship('Tag', backref='Тэги проудкта')
+    calculator = db.relationship('Calculator', backref="Калькуляторы продукта")
 
 
     def __repr__(self):

@@ -1,13 +1,13 @@
 """empty message
 
-Revision ID: fe2010fb4a7d
+Revision ID: 199cfbf3013b
 Revises: None
-Create Date: 2017-02-06 18:56:56.778087
+Create Date: 2017-02-18 17:26:54.300216
 
 """
 
 # revision identifiers, used by Alembic.
-revision = 'fe2010fb4a7d'
+revision = '199cfbf3013b'
 down_revision = None
 
 from alembic import op
@@ -178,6 +178,7 @@ def upgrade():
     sa.Column('name', sa.String(length=50), nullable=True),
     sa.Column('description', sa.String(length=2500), nullable=True),
     sa.Column('property', sa.String(length=2500), nullable=True),
+    sa.Column('article', sa.String(length=2500), nullable=True),
     sa.Column('price', sa.String(length=10), nullable=True),
     sa.Column('category', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['category'], ['category.id'], ),
@@ -250,6 +251,17 @@ def upgrade():
     sa.ForeignKeyConstraint(['product'], ['product.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    op.create_table('tag',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=True),
+    sa.Column('modified_at', sa.DateTime(), nullable=True),
+    sa.Column('name', sa.String(length=50), nullable=True),
+    sa.Column('description', sa.String(length=2500), nullable=True),
+    sa.Column('product', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['product'], ['product.id'], ),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('name')
+    )
     op.create_table('contact',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=True),
@@ -269,18 +281,11 @@ def upgrade():
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('phone_mobile')
     )
-    op.create_table('tag',
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('created_at', sa.DateTime(), nullable=True),
-    sa.Column('modified_at', sa.DateTime(), nullable=True),
-    sa.Column('name', sa.String(length=50), nullable=True),
-    sa.Column('description', sa.String(length=2500), nullable=True),
-    sa.Column('image', sa.Integer(), nullable=True),
-    sa.Column('product', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['image'], ['image.id'], ),
-    sa.ForeignKeyConstraint(['product'], ['product.id'], ),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('name')
+    op.create_table('tags_images',
+    sa.Column('tags_ids', sa.Integer(), nullable=True),
+    sa.Column('images_ids', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['images_ids'], ['image.id'], ),
+    sa.ForeignKeyConstraint(['tags_ids'], ['tag.id'], )
     )
     op.create_table('project',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -335,8 +340,9 @@ def downgrade():
     op.drop_table('invoice')
     op.drop_table('activity')
     op.drop_table('project')
-    op.drop_table('tag')
+    op.drop_table('tags_images')
     op.drop_table('contact')
+    op.drop_table('tag')
     op.drop_table('size')
     op.drop_table('organisation')
     op.drop_table('image')
