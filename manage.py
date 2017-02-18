@@ -39,6 +39,13 @@ def create_user():
 
 
 @manager.command
+def create_all():
+    with app.app_context():
+        print('Creating all ...')
+        db.create_all()
+    print('All is created!!')
+
+@manager.command
 def run():
     """Run app."""
     socketio.run(app, port=PORT)
