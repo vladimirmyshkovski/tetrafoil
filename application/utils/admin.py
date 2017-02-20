@@ -140,7 +140,7 @@ class CategoryView(ModelView):
       'path': form.ImageUploadField('Path',
         base_path=product_path,
         thumbnail_size=(250, 250, True),
-        url_relative_path='static/img/product_images')
+        url_relative_path='img/product_images')
       }
       )
     )
