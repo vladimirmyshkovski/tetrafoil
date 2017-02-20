@@ -25,6 +25,12 @@ def deploy():
             #print('!!! chmod in /var/www/tetrafoil changet to 654 !!!')
 
 
+def create_db():
+	run('python manage.py db init')
+	run('python manage.py db migrate')
+	run('python manage.py db upgrade')
+
+
 def restart():
     env.host_string = config.HOST_STRING
     run('supervisorctl restart ttt')
