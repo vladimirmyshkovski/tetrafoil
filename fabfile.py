@@ -12,8 +12,8 @@ def deploy():
     print('!!! chmod in /var/www/tetrafoil changet to 777 !!!')
     with cd('/var/www/tetrafoil'):
         with shell_env(MODE='PRODUCTION'):
-            run('git reset --hard HEAD')
-            run('git pull')
+            #run('git reset --hard HEAD')
+            #run('git pull')
             run('npm install')
             run('gulp')
             with prefix('source venv/bin/activate'):
