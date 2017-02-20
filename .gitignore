@@ -1,4 +1,4 @@
-dea/
+idea/
 .idea/*
 
 lib/
@@ -20,17 +20,22 @@ include/
 include/*
 
 venv/
-
+venv/*
 
 output/
-
+output/*
 
 node_modules/
-
+node_modules/*
 
 bower_components/
-
+bower_components/*
 
 __pycache__/
+__pycache__/*
 
 migrations/
+migrations/*
+
+db/
+db/*
