@@ -32,3 +32,5 @@ bower_components/
 
 
 __pycache__/
+
+migrations/

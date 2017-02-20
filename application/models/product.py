@@ -11,8 +11,8 @@ class Product(Base):
     article = db.Column(db.String(2500))
     price = db.Column(db.String(10))
     category = db.Column(db.Integer, db.ForeignKey('category.id'))
-    image = db.relationship('Image', backref='Картинки продукта')
-    tags = db.relationship('Tag', backref='Тэги проудкта')
+    image = db.relationship('Image', backref='Картинка продуктов')
+    tags = db.relationship('Tag', backref='Продукты')
     calculator = db.relationship('Calculator', backref="Калькуляторы продукта")
 
 

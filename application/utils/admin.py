@@ -12,6 +12,9 @@ from jinja2 import Markup
 from flask import url_for, session, request
 from ..utils.babel import babel 
 from wtforms import TextAreaField
+from wtforms.ext.sqlalchemy.fields import QuerySelectField
+from flask_admin.form.fields import Select2Field
+from flask.ext.admin.form import Select2Widget
 
 admin = Admin(name='CMS', template_mode='bootstrap3')
 
@@ -46,19 +49,36 @@ class MyLastAdmin(FileAdmin):
 
 class ProductView(ModelView):
 
-  form_overrides = dict(description=TextAreaField, property=TextAreaField, article=TextAreaField)
+  column_hide_backrefs = False
+  form_overrides = {
+  'description': TextAreaField,
+  'property': TextAreaField,
+  'article': TextAreaField
+  }
+  '''
+  form_extra_fields = {
+        'images': QuerySelectField(query_factory=lambda: Image.query.all(), get_label='path')
+    }
+  '''
+  form_extra_fields = {
+        'images': sqla.fields.QuerySelectField(
+            label='path',
+            query_factory=lambda: Image.query.all(),
+            widget=Select2Widget(),
+            get_label='path'
+        )
+    }
 
   form_widget_args = {
     'description': {
-        'rows': 10,
+        'rows': 5,
         'style': 'font-family: monospace;'
     },
     'property': {
-        'rows': 10,
+        'rows': 5,
         'style': 'font-family: monospace;'
     },
-    'article': {
-        'rows': 10,
+    'images': {
         'style': 'font-family: monospace;'
     }
   }
@@ -142,9 +162,15 @@ class ImageView(ModelView):
 
   form_args = {
   'path': {
-  'label': 'File',
+  'label': 'Картинка',
   'base_path': 'img/product_images/',
-  'allow_overwrite': False
+  'allow_overwrite': True
+  },
+  'name': {
+  'label': 'Название'
+  },
+  'tags': {
+  'label': 'Тэги'
   }
   }
   def _list_thumbnail(view, context, model, name):
