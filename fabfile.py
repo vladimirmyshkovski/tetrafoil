@@ -28,10 +28,11 @@ def deploy():
 def create_db():
 	env.host_string = config.HOST_STRING
 	with cd('/var/www/tetrafoil'):
-			with shell_env(MODE='PRODUCTION') and prefix('source venv/bin/activate'):
-				run('python manage.py db init')
-				run('python manage.py db migrate')
-				run('python manage.py db upgrade')
+			with shell_env(MODE='PRODUCTION'):
+				with prefix('source venv/bin/activate'):
+					run('python manage.py db init')
+					run('python manage.py db migrate')
+					run('python manage.py db upgrade')
 
 
 def restart():
