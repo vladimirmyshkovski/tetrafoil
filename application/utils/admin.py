@@ -91,18 +91,18 @@ class ProductView(ModelView):
     if not model.path:
       return ''
 
-    return Markup('<img src="%s">' % url_for('static',
-      filename=form.thumbgen_filename('img/product_images/')))
+    return Markup('<img src="%s" style="width: 250px; height: 250px">' % url_for('static',
+      filename=form.thumbgen_filename(model.path)))
 
   inline_models = [(Image,
     dict(
       form_excluded_columns = ['created_at', 'modified_at'],
       column_formatters = {'path': _list_thumbnail},
       form_extra_fields = {
-      'path': form.ImageUploadField('Path',
+      'path': form.ImageUploadField('Картинка',
         base_path=product_path,
-        thumbnail_size=(100, 100, True),
-        url_relative_path='img/product_images/')
+        thumbnail_size=(50, 50, True),
+        url_relative_path='static/img/product_images')
       })), 
   (Calculator, 
     dict(
@@ -139,8 +139,8 @@ class CategoryView(ModelView):
       form_extra_fields = {
       'path': form.ImageUploadField('Path',
         base_path=product_path,
-        thumbnail_size=(100, 100, True),
-        url_relative_path='img/product_images/')
+        thumbnail_size=(250, 250, True),
+        url_relative_path='static/img/product_images')
       }
       )
     )
@@ -188,8 +188,8 @@ class ImageView(ModelView):
     # In this case, Flask-Admin won't attempt to merge various parameters for the field.
     form_extra_fields = {
         'path': form.ImageUploadField('Image',
-                                      base_path=file_path,
-                                      thumbnail_size=(100, 100, True))
+                                      base_path=product_path,
+                                      thumbnail_size=(250, 250, True))
     }
 
 
