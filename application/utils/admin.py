@@ -163,7 +163,7 @@ class ImageView(ModelView):
   form_args = {
   'path': {
   'label': 'Картинка',
-  'base_path': 'img/product_images/',
+  'base_path': 'img/product_images',
   'allow_overwrite': True
   },
   'name': {
