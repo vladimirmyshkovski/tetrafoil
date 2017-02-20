@@ -102,7 +102,7 @@ class ProductView(ModelView):
       'path': form.ImageUploadField('Картинка',
         base_path=product_path,
         thumbnail_size=(50, 50, True),
-        url_relative_path='static/img/product_images')
+        url_relative_path='/img/product_images')
       })), 
   (Calculator, 
     dict(
