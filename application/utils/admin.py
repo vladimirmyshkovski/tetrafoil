@@ -119,6 +119,10 @@ class ProductView(ModelView):
 
 
 
+
+
+
+
 class CategoryView(ModelView):
   form_excluded_columns = ['created_at', 'modified_at']
 
@@ -156,6 +160,8 @@ class CategoryView(ModelView):
 
 
 class ImageView(ModelView):
+  column_display_all_relations = True
+
   form_overrides = {
   'path': form.FileUploadField
   }

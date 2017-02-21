@@ -1,7 +1,7 @@
 # coding: utf-8
 from flask import render_template, Blueprint, request,abort, session, redirect, url_for
 from ..forms import AddLeedForm
-from ..models import Leed, User, Product, Image, Calculator
+from ..models import Leed, User, Product, Image, Calculator, Tag
 
 
 bp = Blueprint('site', __name__)
@@ -43,16 +43,16 @@ def products():
     return render_template('site/products/products.html')
 
 
-@bp.route('/<keyword>')
+@bp.route('/Продукция/<keyword>')
 def product(keyword):
     """Product page."""
     product = Product.query.filter(Product.name == keyword).first()
-    calculator = Calculator.query.filter(Calculator.product == product.id)
-    image = Image.query.filter(Image.product == product.id).first()
+    product_images = Image.query.filter(Image.product == product.id).all()
+    calculator = Calculator.query.filter(Calculator.product == product.id).first()
     return render_template('site/product/product.html',
         product=product,
-        calculator=calculator,
-        image=image)
+        product_images=product_images,
+        calculator=calculator)
 
 
 @bp.route('/Технические характеристики')

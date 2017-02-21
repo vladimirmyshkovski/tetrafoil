@@ -13,31 +13,27 @@
     var price = {% if product.price %} {{ product.price }} {% else %} 0.15 {% endif %}
 
     var width = {
-        start: {{width.start}},
-        min: {{width.min}},
-        max: {{width.max}},
-        step: {{width.step}}
+        start: {{calculator.width_start}},
+        min: {{calculator.width_min}},
+        max: {{calculator.width_max}},
+        step: {{calculator.width_step}}
     }
     var height = {
-        start: {{height.start}},
-        min: {{height.min}},
-        max: {{height.max}},
-        step: {{height.step}}
+        start: {{calculator.height_step}},
+        min: {{calculator.height_min}},
+        max: {{calculator.height_max}},
+        step: {{calculator.height_step}}
     }
 
 
     var dec = document.querySelector('.js-decimal');
-    var initDec = new Powerange(dec, { decimal: true, callback: displayDecimalValue, min: {{ width.min }}, max: {{ width.max }}, step: {{ width.step }}, start: {{ width.start }} });
+    var initDec = new Powerange(dec, { decimal: true, callback: displayDecimalValue, min: {{calculator.width_min}}, max: {{calculator.width_max}}, step: {{calculator.width_step}}, start: {{calculator.width_step}} });
     function displayDecimalValue() {
         document.getElementById('js-decimal-display').innerHTML = dec.value;
     }
 
-
-
-
-
     var vert = document.querySelector('.js-decimal-vertical');
-    var initVert = new Powerange(vert, { decimal: true, callback: displayDecimalVerticalValue, min: {{ height.min }}, max: {{ height.max }}, step: {{ height.step }}, start: {{ height.start }} });
+    var initVert = new Powerange(vert, { decimal: true, callback: displayDecimalVerticalValue, min: {{calculator.width_min}}, max: {{calculator.width_max}}, step: {{calculator.width_step}}, start: {{calculator.width_start}} });
     function displayDecimalVerticalValue() {
         document.getElementById('js-decimal-vertical-display').innerHTML = vert.value;
     }
@@ -55,13 +51,18 @@
 <article class="main-content" style="padding-top: 20rem">
 <div class="container">
 	<div class="row">
-		<div class="col-lg-6 col-md-12 col-xs-12" style="padding-top: 10mrem">
+        <div class="col-lg-12 com-md-12 col-xs-12" >
+            <h3 style="color: white">{{ product.property }}</h3>
+        </div>
+		<div class="col-lg-6 col-md-12 col-xs-12" style="padding-top: 10rem">
 			<h2>{{ product.name }}</h2>
 			<p>{{ product.description }}</p>
 		</div>
         <div class="col-lg-6 col-md-12 col-xs-12">
         <div style="text-align: center">
-			<img src="/static/img/product_images/{{image.path}}" width="75%">
+        {% if product_images[0] or product_images[1] == 'asdasd' %}
+			<img src="/static/img/product_images/{{product_images[1].path}}" width="75%">
+        {% endif %}
 		</div>
         </div>
 	</div>
@@ -85,7 +86,7 @@
             <input type="text" class="js-decimal-vertical" />
             </div>
             <div class="col-lg-6 col-lg-offset-5 col-md-6 col-md-offset-5 col-sm-6 col-sm-offset-5 col-xs-6 col-xs-offset-5">
-            {% if width.name %}
+            {% if calculator %}
             <div class="btn-group" id="status" data-toggle="buttons">
               <label class="btn btn-default btn-on btn-lg active">
               <input type="radio" value="1" name="multifeatured_module[module_id][status]" checked="checked">IN</label>
@@ -93,10 +94,17 @@
               <input type="radio" value="0" name="multifeatured_module[module_id][status]">OUT</label>
             </div>
             {% endif %}
-            <br><br><br><br>
+        <div class="col-lg-12 com-md-12 col-xs-12" style="padding-top: 10rem">
+            <div class="row">
+            <div class="container">
+            {{ product.article }}
             </div>
-            <br><br><br><br>
-            <div class="col-lg-10 col-md-6 col-md-offset-5 col-sm-6 col-sm-offset-5 col-xs-12">
+            </div>
+        </div>
+            </div>
+            {% if calculator %}
+            <div style="padding-top: 10rem">
+
                                 <span>Ширина мм.
                                 <span id="js-decimal-display" style="width: 5rem; height: 5rem; border:0.25rem solid #0087c4; border-radius: 1rem; text-align: center; padding: 1.5rem 3rem; margin-top: 5rem; ">
                                 </span>
@@ -112,17 +120,17 @@
                                 </span>
                                 </span>
             </div>
-                        <br><br><br><br>
+            {% endif %}
             <div style="padding-top: 5rem; text-align: center;">
             <button class="btn btn-default footer__btn">Получи образец</button>
             </div>
         </div>
-{% if width.name %}
+{#% if width.name %#}
         <style>
 .btn-default.btn-on.active{background-color: #0298da;color: white; outline: none;}
 .btn-default.btn-off.active{background-color: #00608c;color: white; outline: none;}
         </style>
-{% endif %}
+{#% endif %#}
 
 
 
