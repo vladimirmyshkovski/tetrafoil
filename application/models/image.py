@@ -13,6 +13,7 @@ class Image(Base):
     	back_populates="images")
     product = db.Column(db.Integer(), db.ForeignKey('product.id'))
     category = db.Column(db.Integer(), db.ForeignKey('category.id'))
+    
 
     def __repr__(self):
-        return '%s' % self.name
+        return '%s' % self.path

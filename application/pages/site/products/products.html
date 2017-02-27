@@ -14,113 +14,23 @@
 </style>
         <article id="main-content" class="main-content" style="padding-top: 150px">
             <div class="container">
+                {% for i in asd %}
+                {% if asd[i] %}
                 <div class="row" id="termotransfer">
-                    <h2 style="text-align: center; padding-top: 5rem"">Термотрансферная лента</h2>
-                            
+                    
+                    {% for k in asd[i] %}
+                    {% if loop.first and asd[i][k][0] %}
+                    <h2 style="text-align: center; padding-top: 5rem"">{{i}}</h2>
+                    {% endif %}
                     <div class="col-sx-12 col-lg-2 col-md-6 ccenter"> 
-                        <a href="{{url_for('site.product', keyword='Термотрансферная лента')}}" style="outline: none">
-                        <img src="static/img/catalog/WAX Standard_iccat_ttt_1.png" alt="">
+                        <a href="{{url_for('site.product', keyword=k)}}" style="outline: none">
+                        <img src="static/img/product_images/{{asd[i][k][0]}}" alt="">
                         </a>
                     </div>
-                    <div class="col-sx-12 col-lg-2 col-md-6 ccenter"> 
-                        <a href="#" style="outline: none">
-                        <img src="static/img/catalog/WAX Premium_iccat_ttt_1.png" alt="">
-                        </a>
-                    </div>
-                    <div class="col-sx-12 col-lg-2 col-md-6 ccenter"> 
-                        <a href="#" style="outline: none">
-                        <img src="static/img/catalog/Wax Resin flat head_iccat_ttt_1.png" alt="">
-                        </a>
-                    </div>
-                    <div class="col-sx-12 col-lg-2 col-md-6 ccenter">
-                        <a href="#" style="outline: none">
-                        <img src="static/img/catalog/Wax Resin near edge_iccat_ttt_1.png" alt="">
-                        </a>
-                    </div>
-                    <div class="col-sx-12 col-lg-2 col-md-6 ccenter">
-                        <a href="#" style="outline: none">
-                        <img src="static/img/catalog/Resin standard_iccat_ttt_1.png" alt="">
-                        </a>
-                    </div>
-                    <div class="col-sx-12 col-lg-2 col-md-6 ccenter">
-                        <a href="#" style="outline: none">
-                        <img src="static/img/catalog/Resin textile_iccat_ttt_1.png" alt="">
-                        </a>
-                    </div>
+                    {% endfor %}
                 </div>
-                <div class="row" id="termotransfer-color">
-                <h2 style="text-align: center; padding-top: 5rem">Термотрансферная лента COLOR</h2>
-                    <div class="col-sx-12 col-lg-2 col-lg-offset-1 col-md-12 ccenter">
-                        <a href="#" style="outline: none">
-                        <img src="static/img/catalog/Resin Gold_iccat_ttt_1.png" alt="">
-                        </a>
-                    </div>
-                    <div class="col-sx-12 col-lg-2 col-md-6 col-sm-12 ccenter">
-                        <a href="#" style="outline: none">
-                        <img src="static/img/catalog/Resin Silver_iccat_ttt_1.png" alt="">
-                        </a>
-                    </div>
-                    <div class="col-sx-12 col-lg-2 col-md-6 col-sm-12 ccenter">
-                        <a href="#" style="outline: none">
-                        <img src="static/img/catalog/Wax Resin flat head_iccat_ttt_red_1.png" alt="">
-                        </a>
-                    </div>
-                    <div class="col-sx-12 col-lg-2 col-md-6 col-sm-12 ccenter">
-                        <a href="#" style="outline: none">
-                        <img src="static/img/catalog/Wax Resin flat head_iccat_ttt_green_1.png" alt="">
-                        </a>
-                    </div>
-                    <div class="col-sx-12 col-lg-2 col-md-6 col-sm-12 ccenter">
-                        <a href="#" style="outline: none">
-                        <img src="static/img/catalog/Wax Resin flat head_iccat_ttt_blue_1.png" alt="">
-                        </a>
-                    </div>
-                </div>
-
-                <div class="row" id="termotransfer-textile">
-                    <h2 style="text-align: center; padding-top: 5rem">Текстильная лента</h2>
-                    <div class="col-sx-12 col-lg-4 col-lg-offset-2 col-md-6  ccenter">
-                        <a href="#" style="outline: none">
-                        <img src="static/img/catalog/Nylon_iccat_ttt.png" alt="">
-                        </a>
-                    </div>
-                    <div class="col-sx-12 col-lg-4 col-md-6 ccenter">
-                        <a href="#" style="outline: none">
-                        <img src="static/img/catalog/Satin_iccat_ttt.png" alt="">
-                        </a>
-                    </div>
-                </div>
-
-
-
-
-                <div class="row" id="termotransfer-textile">
-
-                    <div class="col-lg-6 col-md-12">
-                    <h2 style="text-align: center; padding-top: 5rem">Печатающие головки</h2>
-                    <div class="col-lg-6 col-md-6 col-xs-12">
-                        <a href="#" style="outline: none">
-                        <img src="static/img/catalog/Head_iccat_ttt.png" alt="">
-                        </a>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-xs-12">
-                        <a href="#" style="outline: none">
-                        <img src="static/img/catalog/Head_iccat_ttt.png" alt="">
-                        </a>
-                    </div>
-                    </div>
-
-                    <div class="col-lg-6 col-md-12">
-                    <h2 style="text-align: center; padding-top: 5rem">Фольга для горячего тиснения</h2>
-                    <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
-                        <a href="#" style="outline: none">
-                        <img src="static/img/catalog/Фольга_iccat_ttt_1.png" alt="">
-                        </a>
-                    </div>
-                    </div>
-
-                </div>
-                </div>
+                {% endif %}
+                {% endfor %}
             </div>
         </article>
 {% endblock %}

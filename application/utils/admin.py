@@ -15,6 +15,7 @@ from wtforms import TextAreaField
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from flask_admin.form.fields import Select2Field
 from flask.ext.admin.form import Select2Widget
+from flask_admin.form.rules import Field
 
 admin = Admin(name='CMS', template_mode='bootstrap3')
 
