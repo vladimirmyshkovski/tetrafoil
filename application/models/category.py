@@ -6,6 +6,7 @@ from .base import *
 
 class Category(Base):
     name = db.Column(db.String(50), unique=True)
+    position = db.Column(db.Integer())
     description = db.Column(db.String(250))
     products = db.relationship('Product', backref='Category')
     image = db.relationship('Image', backref='Картинка категорий')
