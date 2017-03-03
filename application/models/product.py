@@ -6,6 +6,7 @@ from .base import *
 
 class Product(Base):
     name = db.Column(db.String(50), unique=True)
+    position = db.Column(db.Integer())
     description = db.Column(db.String(2500))
     property = db.Column(db.String(2500))
     article = db.Column(db.String(2500))
