@@ -2,8 +2,7 @@
 from flask import render_template, Blueprint, request,abort, session, redirect, url_for
 from ..forms import AddLeedForm
 from ..models import Leed, User, Product, Image, Calculator, Tag, Category
-
-
+#from sqlalchemy import desc
 bp = Blueprint('site', __name__)
 
 
@@ -40,7 +39,7 @@ def about():
 @bp.route('/Продукция')
 def products():
     """Products page."""
-    asd = {c.name : {p.name : p.image for p in Product.query.filter(Product.category == c.id).order_by(Product.position).all() } for c in Category.query.order_by(Category.position).all()} 
+    asd = {c.name : {p.name : p.image for p in Product.query.filter(Product.category == c.id).order_by(Product.position.desc()) } for c in Category.query.order_by(Category.position.desc())} 
     return render_template('site/products/products.html', asd=asd)
 
 
