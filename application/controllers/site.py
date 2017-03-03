@@ -39,7 +39,7 @@ def about():
 @bp.route('/Продукция')
 def products():
     """Products page."""
-    asd = {c.name : {p.name : p.image for p in Product.query.filter(Product.category == c.id).order_by(Product.position.desc()) } for c in Category.query.order_by(Category.position.desc())} 
+    asd = {c.name : {p.name : p.image for p in Product.query.filter(Product.category == c.id).order_by(Product.position) } for c in Category.query.order_by(Category.position)} 
     return render_template('site/products/products.html', asd=asd)
 
 
