@@ -18,7 +18,7 @@ def create():
         phone = params['phone']
         msg = Message("Заявка" + str(request.url_root),
         sender="SiegHeil@1488.hh",
-        recipients=["narnikgamarnikus@gmail.com"])
+        recipients=["info.tetratech@gmail.com"])
         msg.body = "Заявка со страницы " + str(request.base_url) + "/n" + "E-mail " + str(email) + "/n" + "Phone " + str(phone) + "/n" + "ID" + str(id)
         msg.html = "<h1>Заявка со страницы "  + str(request.base_url)  +  "</h1>" + "<p>E-mail " + str(email) + "</p>" +  "<p>Phone "  + str(phone) + "</p>" + "<p>ID " + str(id) + "</p>"
         
