@@ -3,6 +3,7 @@ from flask import render_template, Blueprint, request,abort, session, redirect, 
 from ..forms import AddLeedForm
 from ..models import Leed, User, Product, Image, Calculator, Tag, Category
 #from sqlalchemy import desc
+from collections import OrderedDict
 bp = Blueprint('site', __name__)
 
 
@@ -39,8 +40,10 @@ def about():
 @bp.route('/Продукция')
 def products():
     """Products page."""
-    asd = {c.name : {p.name : p.image for p in Product.query.filter(Product.category == c.id).order_by(Product.position) } for c in Category.query.order_by(Category.position)} 
-    return render_template('site/products/products.html', asd=asd)
+
+    asd = {c.name : {p.name : p.image for p in Product.query.filter(Product.category == c.id).order_by(Product.position.desc()) } for c in Category.query.order_by(Category.position.desc())} 
+    print(OrderedDict(sorted(asd.items()), key=lambda t: len(t[0])))
+    return render_template('site/products/products.html', asd=asd, Product=Product, Category=Category)
 
 
 @bp.route('/Продукция/<keyword>')

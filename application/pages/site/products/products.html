@@ -13,19 +13,22 @@
     }
 </style>
         <article id="main-content" class="main-content" style="padding-top: 150px">
+        {% set categories = Category.query.order_by(Category.position) %}
             <div class="container">
-                {% for i in asd %}
-                {% if asd[i] %}
+                {% for c in categories %}
+
+                {% if categories %}
 
                 <div class="row" id="termotransfer">
                     
-                    {% for k in asd[i] %}
-                    {% if loop.first and asd[i][k][0] %}
-                    <h2 style="text-align: center; padding-top: 5rem"">{{i}}</h2>
+                    {% set products = Product.query.filter(Product.category == c.id).order_by(Product.position) %}
+                    {% for p in products %}
+                    {% if loop.first %}
+                    <h2 style="text-align: center; padding-top: 5rem"">{{c.name}}</h2>
                     {% endif %}
                     <div class="col-sx-12 col-lg-2 col-md-6 ccenter"> 
-                        <a href="{{url_for('site.product', keyword=k)}}" style="outline: none">
-                        <img src="static/img/product_images/{{asd[i][k][0]}}" alt="">
+                        <a href="{{url_for('site.product', keyword=p.name)}}" style="outline: none">
+                        <img src="static/img/product_images/{{p.image[0]}}" alt="">
                         </a>
                     </div>
                     {% endfor %}
