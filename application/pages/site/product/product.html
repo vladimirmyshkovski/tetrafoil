@@ -27,7 +27,7 @@
 
 
     var dec = document.querySelector('.js-decimal');
-    var initDec = new Powerange(dec, { decimal: true, callback: displayDecimalValue, min: {{calculator.width_min}}, max: {{calculator.width_max}}, step: {{calculator.width_step}}, start: {{calculator.width_step}} });
+    var initDec = new Powerange(dec, { decimal: true, callback: displayDecimalValue, min: {{calculator.height_min}}, max: {{calculator.height_max}}, step: {{calculator.height_step}}, start: {{calculator.height_step}} });
     function displayDecimalValue() {
         document.getElementById('js-decimal-display').innerHTML = dec.value;
     }
@@ -51,9 +51,6 @@
 <article class="main-content" style="padding-top: 20rem">
 <div class="container">
 	<div class="row">
-        <div class="col-lg-12 com-md-12 col-xs-12" >
-            <h3 style="color: white">{{ product.property }}</h3>
-        </div>
 		<div class="col-lg-6 col-md-12 col-xs-12" style="padding-top: 10rem">
 			<h2>{{ product.name }}</h2>
 			<p>{{ product.description }}</p>
@@ -61,11 +58,14 @@
         <div class="col-lg-6 col-md-12 col-xs-12">
         <div style="text-align: center">
         {% if product_images[0] or product_images[1] == 'testtesttest' %}
-			<img src="/static/img/product_images/{{product_images[1].path}}" width="75%">
+			<img src="/static/img/product_images/{{product_images[0]}}" width="75%">
         {% endif %}
 		</div>
         </div>
 	</div>
+        <div class="col-lg-12 com-md-12 col-xs-12" >
+            <h5 style="color: white">{{ product.article }}</h3>
+        </div>
 </div>
 </article>
 <article class="main-content" style="background: white">
@@ -75,6 +75,7 @@
         <div class="col-lg-6 col-xs-12">
             <img src="/static/img/product/size_icon-2.png" style="margin-top: 1rem;">
         </div>
+
         <div class="col-lg-6">
             <h1 style="text-align: center">Рассчитай стоимость рулона</h1>
 
@@ -86,6 +87,7 @@
             <input type="text" class="js-decimal-vertical" />
             </div>
             <div class="col-lg-6 col-lg-offset-5 col-md-6 col-md-offset-5 col-sm-6 col-sm-offset-5 col-xs-6 col-xs-offset-5">
+            
             {% if calculator %}
             <div class="btn-group" id="status" data-toggle="buttons">
               <label class="btn btn-default btn-on btn-lg active">
@@ -94,15 +96,10 @@
               <input type="radio" value="0" name="multifeatured_module[module_id][status]">OUT</label>
             </div>
             {% endif %}
-        <div class="col-lg-12 com-md-12 col-xs-12" style="padding-top: 10rem">
-            <div class="row">
-            <div class="container">
-            {{ product.article }}
-            </div>
-            </div>
-        </div>
+
             </div>
             {% if calculator %}
+
             <div style="padding-top: 10rem">
 
                                 <span>Ширина мм.
@@ -120,21 +117,31 @@
                                 </span>
                                 </span>
             </div>
+                        <div class="row" style="padding-top: 10rem" >
+
+            <p style="color: black">{{ product.property }}</p>
+            </div>
             {% endif %}
+            
             <div style="padding-top: 5rem; text-align: center;">
             <button class="btn btn-default footer__btn">Получи образец</button>
             </div>
+        
         </div>
-{#% if calculator %#}
+
+
+        {#% if calculator %#}
         <style>
-.btn-default.btn-on.active{background-color: #0298da;color: white; outline: none;}
-.btn-default.btn-off.active{background-color: #00608c;color: white; outline: none;}
+            .btn-default.btn-on.active{background-color: #0298da;color: white; outline: none;}
+            .btn-default.btn-off.active{background-color: #00608c;color: white; outline: none;}
         </style>
-{#% endif %#}
+        {#% endif %#}
 
 
 
 
-        </div>
+    </div>
+</div>
+
 </article>
 {% endblock %}

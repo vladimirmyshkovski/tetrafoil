@@ -7,20 +7,34 @@ from collections import OrderedDict
 bp = Blueprint('site', __name__)
 
 
+from flask_mail import Message
+from ..utils.mail import mail
+
 @bp.route('/create', methods=['POST', 'GET'])
 def create():
-    leed = Leed()
-    form = AddLeedForm()
-    if form.validate_on_submit():
-        leed.create(**form.data)
-        user = User.query.get(1)
-        session['leed_name'] = form.email.data
-        print(session['leed_name'])
-        User.create_notification(
-            self=user,
-            action='action',
-            title='New leed was created!',
-            message='Hurry, or you will be late!')
+    if request.method == 'POST':
+        params = request.form
+        email = params['email']
+        phone = params['phone']
+        msg = Message("Заявка" + str(request.url_root),
+        sender="SiegHeil@1488.hh",
+        recipients=["narnikgamarnikus@gmail.com"])
+        msg.body = "Заявка со страницы " + str(request.base_url) + "/n" + "E-mail " + str(email) + "/n" + "Phone " + str(phone) + "/n" + "ID" + str(id)
+        msg.html = "<h1>Заявка со страницы "  + str(request.base_url)  +  "</h1>" + "<p>E-mail " + str(email) + "</p>" +  "<p>Phone "  + str(phone) + "</p>" + "<p>ID " + str(id) + "</p>"
+        
+        mail.send(msg)
+        leed = Leed()
+        form = AddLeedForm()
+        if form.validate_on_submit():
+            leed.create(**form.data)
+            user = User.query.get(1)
+            session['leed_name'] = form.email.data
+            print(session['leed_name'])
+            User.create_notification(
+                self=user,
+                action='action',
+                title='New leed was created!',
+                message='Hurry, or you will be late!')
     return redirect(url_for('site.index'))
 
 
@@ -50,7 +64,9 @@ def products():
 def product(keyword):
     """Product page."""
     product = Product.query.filter(Product.name == keyword).first()
+    print(product)
     product_images = Image.query.filter(Image.product == product.id).all()
+    print(product_images)
     calculator = Calculator.query.filter(Calculator.product == product.id).first()
     return render_template('site/product/product.html',
         product=product,
