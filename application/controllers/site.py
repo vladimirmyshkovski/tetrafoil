@@ -30,11 +30,13 @@ def create():
             user = User.query.get(1)
             session['leed_name'] = form.email.data
             print(session['leed_name'])
+            '''
             User.create_notification(
                 self=user,
                 action='action',
                 title='New leed was created!',
                 message='Hurry, or you will be late!')
+            '''
     return redirect(url_for('site.index'))
 
 
