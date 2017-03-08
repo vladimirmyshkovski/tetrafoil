@@ -244,6 +244,11 @@ def register_before_first_request(app):
         pubsub = redis_store.pubsub()
         pubsub.subscribe('msg')
         for msg in pubsub.listen():
+            if msg is None:
+                pass
+            else:
+                with app.app_context():
+                    process_message(msg)
             #print ('>>>>>', msg)
             print('Redis says : ' + str(msg['data']))
 

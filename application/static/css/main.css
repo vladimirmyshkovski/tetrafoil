@@ -582,11 +582,11 @@ a:active {
 }
 
 .navbar-default .navbar-brand img {
-  width: 130px;
+  width: 150px;
 }
 
 .navbar-nav > li > a {
-  padding-top: 30px;
+  padding-top: 40px;
   padding-bottom: 30px;
 }
 
