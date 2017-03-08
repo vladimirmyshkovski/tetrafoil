@@ -15,11 +15,11 @@
         <article id="main-content" class="main-content" style="padding-top: 150px">
         {% set categories = Category.query.order_by(Category.position) %}
             {% if categories %}
+                {% for c in categories %}
 
             <div class="container">
                 <div class="row" id="termotransfer">
 
-                {% for c in categories %}
                     
                     {% set products = Product.query.filter(Product.category == c.id).order_by(Product.position) %}
                     {% for p in products %}
