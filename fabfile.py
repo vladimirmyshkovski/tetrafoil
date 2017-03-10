@@ -9,6 +9,7 @@ host_string = config.HOST_STRING
 def deploy():
     env.host_string = config.HOST_STRING
     run('sudo chmod -R 777 /var/www/tetrafoil/**/**/')
+    run('sudo chmod -R 777 /var/www/tetrafoil/application/static/css/bootstrap.theme.css')
     print('!!! chmod in /var/www/tetrafoil/ changet to 777 !!!')
     with cd('/var/www/tetrafoil'):
         with shell_env(MODE='PRODUCTION'):
