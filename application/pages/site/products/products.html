@@ -1,9 +1,17 @@
 {% extends "/site/layout.html" %}
+{% block page_css %}
+{% endblock %}
+{% block page_js %} 
+{% endblock %}
 
 {% block page_title %}{{keyword}}{% endblock %}
 
 {% block page_content %}
-
+<style>
+    .ccenter {
+        text-align: center;
+    }
+</style>
         <article id="main-content" class="main-content" style="padding-top: 150px">
         {% set categories = Category.query.order_by(Category.position) %}
             {% if categories %}
