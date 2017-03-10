@@ -8,20 +8,20 @@ host_string = config.HOST_STRING
 
 def deploy():
     env.host_string = config.HOST_STRING
-    run('sudo chmod -R 777  /var/www/tetrafoil/')
+    run('sudo chmod -R 777 /var/www/tetrafoil/**/**/')
     print('!!! chmod in /var/www/tetrafoil/ changet to 777 !!!')
     with cd('/var/www/tetrafoil'):
         with shell_env(MODE='PRODUCTION'):
             #run('git reset --hard HEAD')
             #run('git pull')
-            run('sudo npm install')
-            run('sudo gulp')
+            run('npm install')
+            run('gulp')
             with prefix('source venv/bin/activate'):
                 run('pip install -r requirements.txt')
                 run('python manage.py db upgrade')
                 run('python manage.py build')
             run('supervisorctl restart ttt')
-            #run('sudo chmod -Rv 654  /var/www/tetrafoil/**/**/')
+            run('sudo chmod -R 654  /var/www/tetrafoil/**/**/')
             #run('sudo chmod 654 -R /var/www/tetrafoil')
             #print('!!! chmod in /var/www/tetrafoil changet to 654 !!!')
 
