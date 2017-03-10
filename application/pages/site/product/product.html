@@ -1,7 +1,19 @@
 {% extends "/site/layout.html" %}
 {#% block page_css %#}
 <link rel="stylesheet" href="/static/css/libs/powerange.min.css">
-<link rel="stylesheet" href="/pages/site/product/product.css">
+<style>
+    
+.slider-wrapper {
+  margin: 50px 0 30px 30px;
+  position: relative;
+  width: 100%;
+}
+.vertical-wrapper {
+  height: 50rem;
+  width: auto;
+}
+
+</style>
 {#% endblock %#}
 {% block page_title %}{{ product.name }}{% endblock %}
 {% block page_js %} 
