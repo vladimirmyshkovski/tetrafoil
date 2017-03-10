@@ -22,10 +22,6 @@ def deploy():
                 run('python manage.py db upgrade')
                 run('python manage.py build')
             run('supervisorctl restart ttt')
-            run('sudo chmod -R 654  /var/www/tetrafoil/**/**/')
-            #run('sudo chmod 654 -R /var/www/tetrafoil')
-            #print('!!! chmod in /var/www/tetrafoil changet to 654 !!!')
-
 
 def create_db():
 	env.host_string = config.HOST_STRING
