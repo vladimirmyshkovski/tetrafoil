@@ -21,6 +21,21 @@
 
                     
                     {% set products = Product.query.filter(Product.category == c.id).order_by(Product.position) %}
+                    {% if products.count() <= 1%}
+
+                        <div class="col-sx-12 col-lg-3 col-lg-offset-2 col-md-6 center"> 
+
+                        {% for p in products %}
+                        <h2 style="text-align: center; padding-top: 5rem">{{c.name}}</h2>
+
+                        <a href="{{url_for('site.product', keyword=p.name)}}" style="outline: none">
+                        <img src="static/img/product_images/{{p.image[0]}}" alt="">
+                        </a>
+                        {% endfor %}
+
+                    </div>
+
+                    {% else %}
 
                                 <div class="container">
                 <div class="row" id="termotransfer">
@@ -36,7 +51,7 @@
                         {% if loop.first %}
                         <h2 style="text-align: center; padding-top: 5rem">{{c.name}}</h2>
                         {% endif %}
-                    <div class="col-sx-12 col-lg-2 col-md-6 center"> 
+                    <div class="col-sx-12 col-lg-{% if loop.length == 3 %}{{ loop.length + 1  }}{% elif loop.length == 1 %}{{ loop.length + 5 }}{% else %}{{ 12 // loop.length }}{% endif %} col-md-6 center"> 
                         <a href="{{url_for('site.product', keyword=p.name)}}" style="outline: none">
                         <img src="static/img/product_images/{{p.image[0]}}" alt="">
                         </a>
@@ -45,6 +60,7 @@
 
                 </div>
             </div>
+            {% endif %}
                 {% endfor %}
             
             {% endif %}

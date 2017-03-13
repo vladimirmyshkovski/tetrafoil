@@ -82,10 +82,12 @@ def technical():
     return render_template('site/technical/technical.html')
 
 
+
 @bp.route('/Образцы')
 def sample():
     """Sample page."""
     return render_template('site/sample/sample.html')
+
 
 
 @bp.route('/Доставка')

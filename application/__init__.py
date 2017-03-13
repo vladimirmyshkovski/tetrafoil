@@ -239,23 +239,9 @@ def register_before_first_request(app):
     from .utils.redis import redis_store
     from .utils.socketio import socketio
 
-    def redisReader():
-        print ('Starting Redis subscriber')
-        pubsub = redis_store.pubsub()
-        pubsub.subscribe('msg')
-        for msg in pubsub.listen():
-            if msg is None:
-                pass
-            else:
-                with app.app_context():
-                    process_message(msg)
-            #print ('>>>>>', msg)
-            print('Redis says : ' + str(msg['data']))
-
     def setupRedis():
-        print('setupRedis')
         pool = eventlet.GreenPool()
-        pool.spawn(redisReader)
+        #pool.spawn(redisReader)
 
     app.before_first_request(setupRedis)
 
