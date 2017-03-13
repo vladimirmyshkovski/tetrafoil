@@ -67,7 +67,7 @@ def product(keyword):
     """Product page."""
     product = Product.query.filter(Product.name == keyword).first()
     print(product)
-    product_images = Image.query.filter(Image.product == product.id).all()
+    product_images = Image.query.filter(Image.product == product.id, Image.tags.any(Tag.name == 'продуктовая страница')).all()
     print(product_images)
     calculator = Calculator.query.filter(Calculator.product == product.id).first()
     return render_template('site/product/product.html',
