@@ -9,7 +9,7 @@ cffi==1.9.1
 chardet==2.3.0
 click==6.7
 coverage==4.0.2
-cryptography==1.7.2
+cryptography==3.2
 cupshelpers==1.0
 decorator==4.0.11
 enum-compat==0.0.2
