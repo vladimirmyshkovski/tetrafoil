@@ -42,7 +42,7 @@ idna==2.4
 infinity==1.4
 intervals==0.8.0
 itsdangerous==0.24
-Jinja2==2.9.5
+Jinja2==2.11.3
 lazy-object-proxy==1.2.2
 lightdm-gtk-greeter-settings==1.2.1
 livereload==2.4.0
